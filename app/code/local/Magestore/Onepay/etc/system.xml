@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+		<payment>
+			<groups>
+				<onepay translate="label comment" module="payment">
+					<label>Onepay</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>0</show_in_store>
+                    <fields>
+						<active translate="label comment">
+							<label>Enabled</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</active>
+						<title translate="label comment">
+							<label>Title</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+							<comment>Shown on checkout page</comment>
+						</title>
+						<onepay_description translate="label comment">
+							<label>Description</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+							<comment><![CDATA[Shown on checkout page]]></comment>
+						</onepay_description>
+						<onepay_merchant_id translate="label comment">
+							<label>Merchant ID</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>15</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</onepay_merchant_id>
+						<onepay_merchant_access_code translate="label comment">
+							<label>Merchant access code</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</onepay_merchant_access_code>
+						<onepay_url_payment translate="label comment">
+							<label>Onepay url payment</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>25</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</onepay_url_payment>
+						<payment_server translate="label comment">
+							<label>Payment server</label>
+							<frontend_type>select</frontend_type>
+							<source_model>onepay/system_config_source_paymentserver</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+							<comment><![CDATA[Payment Server Display Language Locale]]></comment>
+						</payment_server>
+						<notify_customer translate="label comment">
+							<label>Notify Customer</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>35</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+							<comment><![CDATA[Send notify mail to customer when onepay response]]></comment>
+						</notify_customer>
+					</fields>
+				</onepay>
+			</groups>
+		</payment>
+	</sections>
+</config>

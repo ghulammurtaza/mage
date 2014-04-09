@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+        <infortis translate="label">
+            <label>Infortis Extensions</label>
+            <sort_order>200</sort_order>
+        </infortis>
+    </tabs>
+    <sections>
+        <superslideshow translate="label">
+			<label>Home Page Slideshow</label>
+			<tab>infortis</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>300</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+            <groups>
+				<general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enable Slideshow</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+						<blocks translate="label">
+                            <label>Displayed Static Blocks</label>
+							<comment>Comma separated list of block identifiers. These blocks will be displayed as slides.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </blocks>
+						<directory translate="label">
+                            <label>Images Directory</label>
+							<comment>Path to the directory containing slide images. Path is relative to 'media' directory. No leading or trailing slashes.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </directory>
+						<files translate="label">
+                            <label>Displayed Images</label>
+							<comment>Comma separated list of images (files from Images Directory) to be displayed in the slideshow. E.g.: slide1.png,slide2.jpg,some_image.jpg</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </files>
+						<!-- -->
+						<fx translate="label">
+							<label>Transition Effect Animation</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>superslideshow/source_fx</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</fx>
+						<easing translate="label">
+							<label>Easing Method</label>
+							<comment>The type of easing applied to the transition effect animation.</comment>
+                            <frontend_type>select</frontend_type>
+							<source_model>superslideshow/source_easing</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</easing>
+						<timeout translate="label">
+                            <label>Timeout</label>
+							<comment>Time (in milliseconds) between slide transitions. "0" to disable automatic transition. Note that 1000 miliseconds = 1 second.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </timeout>
+						<speed_out translate="label">
+                            <label>Transition Speed (Out)</label>
+							<comment>Time (in milliseconds) of slide "out" transition animation. Defines how fast the current slide hides its content.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </speed_out>
+						<speed_in translate="label">
+                            <label>Transition Speed (In)</label>
+							<comment>Time (in milliseconds) of slide "in" transition animation. Defines how fast the next slide reveals its content.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>81</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </speed_in>
+						<sync translate="label">
+							<label>Synchronization</label>
+							<comment>If enabled, "in" and "out" transitions will occur simultaneously.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sync>
+						<pause translate="label">
+							<label>Pause on Hover</label>
+							<comment>If enabled, when the slideshow is mouseovered then the autoplay functionality will pause.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</pause>
+						<height translate="label">
+                            <label>Slideshow Height</label>
+							<comment>Value in pixels (do not add "px" suffix). Leave empty to use default (490 pixels).</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </height>
+						<fit translate="label">
+							<label>Fit Slides</label>
+							<comment>Force slides to fit slideshow size, if the slideshow height is different than the default height.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</fit>
+					</fields>
+				</general>
+            </groups>
+        </superslideshow>
+    </sections>
+</config> 

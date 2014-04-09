@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <onepay_index_index>
+        <reference name="content">
+            <block type="onepay/onepay" name="onepay" template="onepay/onepay.phtml" />
+        </reference>
+    </onepay_index_index>
+
+</layout> 

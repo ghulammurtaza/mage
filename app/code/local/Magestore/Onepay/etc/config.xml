@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Magestore_Onepay>
+            <version>0.1.0</version>
+        </Magestore_Onepay>
+    </modules>
+    <frontend>
+        <routers>
+            <onepay>
+                <use>standard</use>
+                <args>
+                    <module>Magestore_Onepay</module>
+                    <frontName>onepay</frontName>
+                </args>
+            </onepay>
+        </routers>
+        <layout>
+            <updates>
+                <onepay>
+                    <file>onepay.xml</file>
+                </onepay>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<onepay>
+				<use>admin</use>
+				<args>
+					<module>Magestore_Onepay</module>
+					<frontName>onepay</frontName>
+				</args>
+			</onepay>
+        </routers>
+    </admin>
+    <adminhtml>
+		<!--<menu>
+			<onepay module="onepay">
+				<title>Onepay</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="onepay">
+						<title>Manage Items</title>
+						<sort_order>0</sort_order>
+						<action>onepay/adminhtml_onepay</action>
+					</items>
+				</children>
+			</onepay>
+		</menu>-->
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Magestore_Onepay>
+							<title>Onepay Module</title>
+							<sort_order>10</sort_order>
+						</Magestore_Onepay>
+						<system>
+							<children>
+								<config>
+									<children>
+										<onepay translate="title">
+											<title>Onepay</title>
+											<sort_order>50</sort_order>
+										</onepay>									
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<onepay>
+					<file>onepay.xml</file>
+				</onepay>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <onepay>
+                <class>Magestore_Onepay_Model</class>
+                <resourceModel>onepay_mysql4</resourceModel>
+            </onepay>
+            <onepay_mysql4>
+                <class>Magestore_Onepay_Model_Mysql4</class>
+                <entities>
+                    <onepay>
+                        <table>onepay</table>
+                    </onepay>
+                </entities>
+            </onepay_mysql4>
+        </models>
+        <resources>
+            <onepay_setup>
+                <setup>
+                    <module>Magestore_Onepay</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </onepay_setup>
+            <onepay_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </onepay_write>
+            <onepay_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </onepay_read>
+        </resources>
+        <blocks>
+            <onepay>
+                <class>Magestore_Onepay_Block</class>
+            </onepay>
+        </blocks>
+        <helpers>
+            <onepay>
+                <class>Magestore_Onepay_Helper</class>
+            </onepay>
+        </helpers>
+		
+		<sales>
+            <order>
+                <statuses>
+                    <!-- retained for backwards compatibility, not used anymore -->
+                    <pending_onepay translate="label"><label>Pending Onepay</label></pending_onepay>
+                </statuses>
+            </order>
+        </sales>
+		
+    </global>
+	<default>
+		<payment>
+			<onepay>
+				<active>0</active>
+				<title>Onepay method</title>
+				<onepay_description><![CDATA[You will be redirected to OnePay website when you place an order.]]></onepay_description>
+				<onepay_merchant_id>TESTONEPAYUSD</onepay_merchant_id>
+				<onepay_merchant_access_code>2F668CD2</onepay_merchant_access_code>
+				<onepay_url_payment>https://mtf.onepay.vn/vpcpay/vpcpay.op</onepay_url_payment>
+				<payment_server>en</payment_server>
+				<notify_customer>1</notify_customer>
+				<model>onepay/onepay</model>
+			</onepay>
+		</payment>
+	</default>
+</config>

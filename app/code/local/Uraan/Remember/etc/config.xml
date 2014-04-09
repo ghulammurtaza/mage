@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Uraan_Remember>
+            <version>0.2.0</version>
+        </Uraan_Remember>
+    </modules>
+ 
+    <frontend>
+        <routers>
+            <customer>
+                <args>
+                    <modules>
+                        <Uraan_Remember before="Mage_Customer_AccountController">Uraan_Remember_Frontend_Customer</Uraan_Remember>
+                    </modules>
+                </args>
+            </customer>
+        </routers>
+    </frontend>
+</config>

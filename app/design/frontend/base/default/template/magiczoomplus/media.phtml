@@ -1,0 +1,181 @@
+<?php
+
+/**
+ * Magictoolbox product media template for Magento store.
+ * Allow use MagicTools on product detailes page.
+ * @mail support@magictoolbox.com
+ */
+
+$magicToolboxHelper = Mage::helper('magiczoomplus/settings');
+$tool = $magicToolboxHelper->loadTool('product');
+
+$magic360ClassName = Mage::registry('magic360ClassName');
+if($magic360ClassName) {
+    $tool->params->setValue('enable-effect', 'No');
+    //require(dirname(__FILE__).'/../'.$magic360ClassName.'/media.phtml');
+    require(Mage::getSingleton('core/design_package')->getTemplateFilename($magic360ClassName.'/media.phtml'));
+    //Mage::unregister('magic360ClassName');
+    return;
+}
+
+$enableEffect = !$tool->params->checkValue('enable-effect', 'No');
+if(!$enableEffect) {
+    require($magicToolboxHelper->getProductViewMediaTemplateFilename());
+    return;
+}
+
+$_product = $this->getProduct();
+$id = $_product->getId();
+$_product_title = $title = $this->htmlEscape($_product->getName());
+$main_image_file = $_product->getImage();
+$main = '';
+
+if($main_image_file && $main_image_file != 'no_selection') {
+
+    $output_helper = $this->helper('catalog/output');
+    $description = $this->htmlEscape($output_helper->productAttribute($_product, $_product->getDescription(), 'description'));
+    $shortDescription = $this->htmlEscape($output_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description'));
+
+    $img = $this->helper('catalog/image')->init($_product, 'image', $main_image_file)->__toString();
+    $originalSizeArray = $this->helper('catalog/image')->getOriginalSizeArray();
+    if($tool->params->checkValue('square-images', 'Yes')) {
+        $big_image_size = ($originalSizeArray[0] > $originalSizeArray[1]) ? $originalSizeArray[0] : $originalSizeArray[1];
+        $img = $this->helper('catalog/image')->resize($big_image_size)->__toString();
+    }
+    list($w, $h) = $magicToolboxHelper->magicToolboxGetSizes('thumb', $originalSizeArray);
+    $thumb = $this->helper('catalog/image')->init($_product, 'small_image', $main_image_file)->resize($w, $h)->__toString();
+
+    $main = $tool->getMainTemplate(compact('id', 'title', 'description', 'shortDescription', 'img', 'thumb'));
+
+} else {
+    $tool->params->setValue('enable-effect', 'No');
+    require($magicToolboxHelper->getProductViewMediaTemplateFilename());
+    return;
+}
+
+$images = array();
+$hidden_images = array();
+
+if(!$this->_isGalleryDisabled) {
+    $iCount = count($this->getGalleryImages()->getItems());
+    if($iCount > ($tool->type == 'standard' ? 1 : 0)) {
+        foreach($this->getGalleryImages() as $_image) {
+            $_image_file = $_image->getFile();
+            $_image_path  = $_image->getPath();
+            $originalSizeArray = getimagesize($_image_path);
+            list($w, $h) = $magicToolboxHelper->magicToolboxGetSizes('thumb', $originalSizeArray);
+            $medium = $this->helper('catalog/image')->init($_product, 'small_image', $_image_file)->resize($w, $h)->__toString();
+            list($w, $h) = $magicToolboxHelper->magicToolboxGetSizes('selector', $originalSizeArray);
+            $thumb = $this->helper('catalog/image')->init($_product, 'thumbnail', $_image_file)->resize($w, $h)->__toString();
+            if($tool->params->checkValue('square-images', 'Yes')) {
+                $big_image_size = ($originalSizeArray[0] > $originalSizeArray[1]) ? $originalSizeArray[0] : $originalSizeArray[1];
+                $img = $this->helper('catalog/image')->init($_product, 'image', $_image_file)->resize($big_image_size)->__toString();
+            } else {
+                $img = $this->helper('catalog/image')->init($_product, 'image', $_image_file)->__toString();
+            }
+
+            $alt = $this->htmlEscape($_image->getLabel());
+            if($tool->params->checkValue('use-individual-titles', 'Yes')) {
+                $title = empty($alt) ? $_product_title : $alt;
+            }
+
+            $a = $tool->getSelectorTemplate(compact('id', 'img', 'thumb', 'medium', 'title', 'alt'));
+            $event = 'click';
+            $event = strtolower($tool->params->getValue('selectors-change'));
+            $a = str_replace('<a ', '<a on' . $event . '="MagicToolboxChangeSelector(this);" ', $a);
+            if($main_image_file == $_image_file) {
+                $a = str_replace('<img ', '<img id="imageMain'.$id.'" ', $a);
+            }
+            if($tool->params->checkValue('ignore-magento-css', 'Yes')) {
+                $a = str_replace('<a ', '<a class="ignore-magento-css" ', $a);
+                $a = str_replace('<img ', '<img class="ignore-magento-css" ', $a);
+            }
+            $images[] = $a;
+        }
+    }
+
+
+
+    if($_product->getTypeId() == 'configurable') {
+        if($tool->params->checkValue('show-associated-product-images', 'Yes')) {
+?>
+<script type="text/javascript">
+    var useAssociatedProductImages = true;
+</script>
+<?php
+            $selectorsVisibility = $tool->params->checkValue('load-associated-product-images', 'within a gallery');
+            $scrollEnabled = $tool->params->checkValue('magicscroll', 'Yes');
+            $associatedProducts = $_product->loadByAttribute('sku', $_product->getSku())->getTypeInstance()->getUsedProducts();
+            foreach($associatedProducts as $associatedProduct) {
+                $associatedProductId = $associatedProduct->getId();
+                //NOTE: to get gallery
+                //$_associatedProduct = Mage::getModel('catalog/product')->load($associatedProductId);
+                if($associatedProduct->image && $associatedProduct->image != 'no_selection') {
+                    $associatedImg = $this->helper('catalog/image')->init($associatedProduct, 'image', $associatedProduct->getImage())->__toString();
+                    $originalSizeArray = $this->helper('catalog/image')->getOriginalSizeArray();
+                    if($tool->params->checkValue('square-images', 'Yes')) {
+                        $big_image_size = ($originalSizeArray[0] > $originalSizeArray[1]) ? $originalSizeArray[0] : $originalSizeArray[1];
+                        $associatedImg = $this->helper('catalog/image')->resize($big_image_size)->__toString();
+                    }
+                    list($w, $h) = $magicToolboxHelper->magicToolboxGetSizes('thumb', $originalSizeArray);
+                    $associatedThumb = $this->helper('catalog/image')->init($associatedProduct, 'small_image', $associatedProduct->getImage())->resize($w, $h)->__toString();
+                    list($w, $h) = $magicToolboxHelper->magicToolboxGetSizes('selector', $originalSizeArray);
+                    $associatedSelector = $this->helper('catalog/image')->init($associatedProduct, 'thumbnail', $associatedProduct->getImage())->resize($w, $h)->__toString();
+
+                    $alt = $this->htmlEscape($associatedProduct->getImageLabel());
+                    if($tool->params->checkValue('use-individual-titles', 'Yes')) {
+                        $title = empty($alt) ? $_product_title : $alt;
+                    }
+
+                    $selector = $tool->getSelectorTemplate(array(
+                        'id' => $id,
+                        'img' => $associatedImg,
+                        'thumb' => $associatedSelector,
+                        'medium' => $associatedThumb,
+                        'title' => $title,
+                        'alt' => $alt
+                    ));
+                    if(!$selectorsVisibility) {
+                        $selector = str_replace('<a ', '<a class="hidden-selector" ', $selector);
+                        if($scrollEnabled) {
+                            $hidden_images[] = str_replace('<img ', '<img id="imageConfigurable'.$associatedProductId.'" ', $selector);
+                        } else {
+                            $images[] = str_replace('<img ', '<img id="imageConfigurable'.$associatedProductId.'" ', $selector);
+                        }
+                    } else {
+                        if($scrollEnabled) {
+                            $hidden_images[] = str_replace('<img ', '<img id="imageConfigurable'.$associatedProductId.'" ', $selector);
+                            $images[] = $selector;
+                        } else {
+                            $images[] = str_replace('<img ', '<img id="imageConfigurable'.$associatedProductId.'" ', $selector);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+// if(!$tool->params->paramExists('template')) {
+//     $tool->params->set('template', 'original');
+// }
+
+//DEPRECATED:
+//because of issue when not standard type tool's (scroll) params replace standard type tool's params (magiczoomplus)
+//'template' option not present there
+//MagicToolboxTemplateHelperClass::setOptions($tool->params);
+
+if(!empty($hidden_images)) {
+    echo '<div style="display: none !important;">'.implode($hidden_images).'</div>';
+}
+echo MagicToolboxTemplateHelperClass::render(array(
+    'main' => $main,
+    'thumbs' => $images,
+    'pid' => $id,
+    'moviews' => $this->__('More Views')
+));
+
+echo '<img id="image" scr="" style="display: none !important;" />';
+
+?>

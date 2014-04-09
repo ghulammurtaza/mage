@@ -1,0 +1,23 @@
+<?php
+/**
+ * Mageplace Twitter Connector
+ *
+ * @category	Mageplace_Twitter
+ * @package		Mageplace_Twitter_Connect
+ * @copyright	Copyright (c) 2011 Mageplace. (http://www.mageplace.com)
+ * @license		http://www.mageplace.com/disclaimer.html
+ */
+
+// WARNING! Don't change span class "twitterconnect-button"
+?>
+<span class="twitterconnect-button">
+<?php if(strtolower(substr($this->getLinkUrl(),0,4))==='http'): ?>
+	<a href="<?php echo $this->getLinkUrl(); ?>" title="<?php echo $this->getTitle(); ?>" class="link-twitter">
+<?php elseif($this->getLinkUrl()): ?>
+	<a href="<?php echo $this->getUrl($this->getLinkUrl()); ?>" title="<?php echo $this->getTitle(); ?>" class="link-twitter">
+<?php endif; ?>
+		<span><?php echo $this->getTitle(); ?></span>
+<?php if($this->getLinkUrl()): ?>
+	</a>
+<?php endif ?>
+</span>

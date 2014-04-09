@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplace Twitter Connector
+ *
+ * @category	Mageplace_Twitter
+ * @package		Mageplace_Twitter_Connect
+ * @copyright	Copyright (c) 2011 Mageplace. (http://www.mageplace.com)
+ * @license		http://www.mageplace.com/disclaimer.html
+ */
+-->
+<config>
+	<modules>
+		<Mageplace_Twitter_Connect>
+			<version>2.2.0</version>
+		</Mageplace_Twitter_Connect>
+	</modules>
+
+	<global>
+		<fieldsets>
+			<customer_account>
+				<twitter_user_id>
+					<create>1</create>
+					<update>1</update>
+				</twitter_user_id>
+			</customer_account>
+		</fieldsets>
+		<resources>
+			<twitterconnect_setup>
+				<setup>
+					<module>Mageplace_Twitter_Connect</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</twitterconnect_setup>
+			<twitterconnect_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</twitterconnect_write>
+			<twitterconnect_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</twitterconnect_read>
+		</resources>
+		<blocks>
+			<twitterconnect>
+				<class>Mageplace_Twitter_Connect_Block</class>
+			</twitterconnect>
+		</blocks>
+		<models>
+			<twittercore>
+				<class>Mageplace_Twitter_Core_Model</class>
+			</twittercore>
+			<twitterconnect>
+				<class>Mageplace_Twitter_Connect_Model</class>
+                <resourceModel>twitterconnect_mysql4</resourceModel>
+			</twitterconnect>
+            <twitterconnect_mysql4>
+                <class>Mageplace_Twitter_Connect_Model_Mysql4</class>
+                <entities>
+                    <synch>
+                        <table>twitterconnect_synch</table>
+                    </synch>
+                </entities>
+            </twitterconnect_mysql4>
+		</models>
+		<helpers>
+			<twitterconnect>
+				<class>Mageplace_Twitter_Connect_Helper</class>
+			</twitterconnect>
+		</helpers>
+		<events>
+			<core_block_abstract_to_html_after>
+				<observers>
+					<twitterconnect>
+						<class>twitterconnect/observer</class>
+						<method>processCoreBlockAbstractToHtmlAfter</method>
+					</twitterconnect>
+				</observers>
+			</core_block_abstract_to_html_after>
+			<sales_order_save_after>
+				<observers>
+					<twitterconnect>
+						<class>twitterconnect/observer</class>
+						<method>processSalesOrderSaveAfter</method>
+					</twitterconnect>
+				</observers>
+			</sales_order_save_after>
+		</events>
+	</global>
+	
+	<frontend>
+		<routers>
+			<twitterconnect>
+				<use>standard</use>
+				<args>
+					<module>Mageplace_Twitter_Connect</module>
+					<frontName>twitterconnect</frontName>
+				</args>
+			</twitterconnect>
+		</routers>
+		<translate>
+			<modules>
+				<Mageplace_Twitter_Connect>
+					<files>
+						<default>Mageplace_Twitter_Connect.csv</default>
+					</files>
+				</Mageplace_Twitter_Connect>
+			</modules>
+		</translate>
+		<layout>
+			<updates>
+				<twitterconnect>
+					<file>twitterconnect.xml</file>
+				</twitterconnect>
+			</updates>
+		</layout>
+	</frontend>
+
+	<adminhtml>
+		<translate>
+			<modules>
+				<Mageplace_Twitter_Connect>
+					<files>
+						<default>Mageplace_Twitter_Connect.csv</default>
+					</files>
+				</Mageplace_Twitter_Connect>
+			</modules>
+		</translate>
+
+		<acl>
+			<resources>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<twitterconnect translate="title" module="twitterconnect">
+											<title>Twitter Connect</title>
+											<sort_order>100</sort_order>
+										</twitterconnect>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</adminhtml>
+
+	<default>
+		<web>
+			<routers>
+				<twitterconnect>
+					<area>frontend</area>
+					<class>Mageplace_Twitter_Connect_Controller_Varien_Router_Standard</class>
+				</twitterconnect>
+			</routers>
+		</web>
+		<twitterconnect>
+			<general>
+				<enable_extension>0</enable_extension>
+				<callback_url>twitterconnect/login/callback</callback_url>
+                <title>Sign in with Twitter</title>
+				<orderstatus>complete</orderstatus>
+			</general>
+			<content>
+				<show_in_login>0</show_in_login>				
+				<show_in_checkout>0</show_in_checkout>				
+				<show_custom>0</show_custom>
+				<show_widget>0</show_widget>
+			</content>
+		</twitterconnect>
+	</default>
+</config>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ajax_catalog_list/navigation.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>ajax_catalog_list/loader.css</name>
+            </action>
+        </reference>
+    </default>
+    
+    <catalog_category_layered>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ajax_catalog_list/navigation.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>ajax_catalog_list/loader.css</name>
+            </action>
+        </reference>
+    </catalog_category_layered>
+    
+    <catalogsearch_result_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ajax_catalog_list/navigation.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>ajax_catalog_list/loader.css</name>
+            </action>
+        </reference>
+    </catalogsearch_result_index>
+
+    <catalogsearch_advanced_result>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>ajax_catalog_list/navigation.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>ajax_catalog_list/loader.css</name>
+            </action>
+        </reference>
+    </catalogsearch_result_index>
+</layout>

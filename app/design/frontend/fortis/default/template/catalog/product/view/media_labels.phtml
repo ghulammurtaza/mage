@@ -1,0 +1,30 @@
+<?php
+/**
+ *
+ *
+ */
+?>
+<?php $_product = $this->getProduct(); ?>
+<?php $themeHelper = $this->helper('themeadmin'); ?>
+<?php
+	// Check if displaying "new" label is enabled and if product is marked as "new"
+	$isNew = false;
+	if (Mage::getStoreConfig('themeadmin/products/label_new_enabled'))
+	{	
+		$isNew = $themeHelper->isNew($_product);
+	}
+	
+	// Check if displaying "sale" label is enabled and if product has a special price
+	$isSpecial = false;
+	if (Mage::getStoreConfig('themeadmin/products/label_sale_enabled'))
+	{
+		$isSpecial = $themeHelper->isOnSale($_product);
+	}
+?>
+
+<?php if ($isNew == true): ?>
+	<img src="<?php echo $this->getSkinUrl("images/stickers/new.png"); ?>" alt="<?php echo $this->__('New'); ?>" class="sticker sticker-top-left" />
+<?php endif; ?>
+<?php if ($isSpecial == true): ?>
+	<img src="<?php echo $this->getSkinUrl("images/stickers/sale.png"); ?>" alt="<?php echo $this->__('Sale'); ?>" class="sticker sticker-top-right" />
+<?php endif; ?>

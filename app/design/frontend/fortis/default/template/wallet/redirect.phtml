@@ -1,0 +1,42 @@
+<?php
+// Retrieve order
+$_order = new Mage_Sales_Model_Order();
+$orderId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+$_order->loadByIncrementId($orderId);
+//$secureHash = 'E59F32DCADBFFA626EDCDFCD52E627B8';
+$secureHash = 'F92DE6C32AF4F65E1FB9223396B8F526';
+$gid = Mage::getModel('wallet/standard')->getGatewayId();
+$amount = $_order->getBaseGrandTotal()*100;
+$desc = $this->__('Book for checkout');
+        $elements = array(
+            'amount'              => $amount,
+            'gid'                 => $gid,
+            'merchinvno'          => $orderId,
+            'redirect'            => $this->getUrl('wallet/payment/response'),
+            'desc'                => $desc,
+        );
+$data = ksort($elements);
+$string = $secureHash;
+foreach($elements as $key=>$value){
+    $string .= $value;    
+}
+$encrypt = strtoupper(md5($string));
+  //echo $_order->getBaseGrandTotal(); exit;
+?>
+<div class="custom_wallety_mess">
+    <?php echo $this->__('Click on this button to pay with Wallety'); ?>
+</div>
+<form name="wallet" id="wallet" method="post" action="https://www.wallety.com/checkout/checkout">
+    <input type="hidden" name="amount" value="<?php echo $amount; ?>" />
+    <input type="hidden" name="check_sum" value="<?php echo $encrypt; ?>" />
+    <input type="hidden" name="desc" value="<?php echo $desc; ?>" />
+    <input type="hidden" name="gid" value="<?php echo $gid; ?>" />
+    <input type="hidden" name="merchinvno" value="<?php echo $orderId; ?>" />
+    <input type="hidden" name="redirect" value="<?php echo $this->getUrl('wallet/payment/response'); ?>" />
+    <input type="image" name="checkout" src="https://www.wallety.com/checkout/images/wallety_btn.png" />
+</form>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        //jQuery('#wallet').submit();
+    });
+</script>

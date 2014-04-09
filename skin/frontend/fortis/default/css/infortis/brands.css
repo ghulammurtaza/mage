@@ -1,0 +1,27 @@
+
+/* Brands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+.box-brand {
+	width:210px;
+	height:50px;
+	margin:10px 0;
+}
+
+/* On product page: Product Attributes block
+-------------------------------------------------------------- */
+.product-view .product-attributes .box-brand {
+	margin:10px 0 15px;
+	padding-bottom:25px;
+	border-bottom:1px solid #f2f2f2;
+}
+
+/* Brand image transition
+-------------------------------------------------------------- */
+.box-brand img {
+	transition:			opacity 300ms ease-in-out;
+	-moz-transition:	opacity 300ms ease-in-out;
+	-webkit-transition:	opacity 300ms ease-in-out;
+	-o-transition:		opacity 300ms ease-in-out;
+}
+.box-brand img:hover { opacity:0.8; }

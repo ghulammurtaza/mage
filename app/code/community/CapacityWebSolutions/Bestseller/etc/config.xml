@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright  Copyright (c) 2011 Capacity Web Solutions Pvt. Ltd  (http://www.capacitywebsolutions.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+	<global>
+		<modules>
+                <CapacityWebSolutions_Bestseller>
+                        <version>1.0.0</version>
+                </CapacityWebSolutions_Bestseller>
+        </modules>
+	<blocks>
+            <bestseller>
+                <rewrite>
+		 <bestseller>CapacityWebSolutions_Bestseller_Block_Bestseller</bestseller>
+		</rewrite>
+            </bestseller>
+	 </blocks>
+
+        </global>
+	   <frontend>
+                <routers>
+                        <bestseller>
+                                <use>standard</use>
+                                <args>
+                                      <module>CapacityWebSolutions_Bestseller</module>
+                                      <frontName>bestseller</frontName>
+                                </args>
+                        </bestseller>
+                </routers>
+		<layout>
+			<updates>
+				<bestseller>
+		   		      <file>bestseller.xml</file>
+				</bestseller>
+			</updates>
+       		</layout>
+        </frontend>
+<adminhtml>
+  <acl>
+    <resources>
+        <admin>
+            <children>
+                <system>
+                    <children>
+                        <config>
+                            <children>
+                                <bestseller>
+                                    <title>Bestseller Section</title>
+                                </bestseller>
+                            </children>
+                        </config>
+                    </children>
+                </system>
+            </children>
+        </admin>
+    </resources>
+</acl>
+		
+	</adminhtml>	
+</config>

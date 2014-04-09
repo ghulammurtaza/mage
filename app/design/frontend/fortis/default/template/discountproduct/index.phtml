@@ -1,0 +1,5 @@
+<h1>Discounted books</h1>
+<?php
+    $res = $this->getLayout()->createBlock('catalog/product_list')->setTemplate('catalog/product/discount.phtml')->toHtml();
+    echo $res;
+?>

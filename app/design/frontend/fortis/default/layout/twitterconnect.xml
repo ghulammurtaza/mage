@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplace Twitter Connector
+ *
+ * @category	Mageplace_Twitter
+ * @package		Mageplace_Twitter_Connect
+ * @copyright	Copyright (c) 2011 Mageplace. (http://www.mageplace.com)
+ * @license		http://www.mageplace.com/disclaimer.html
+ */
+-->
+<layout version="1.0.0">
+	<default>
+		<reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/mageplace/socialbuttons/twitterconnect.js</name></action>
+			<action method="addItem"><type>skin_css</type><name>css/mageplace/socialbuttons/twitterconnect.css</name></action>
+		</reference>
+
+		<reference name="customer_form_login">
+			 <block type="twitterconnect/customer_connectbutton" name="customer_form_login_twitterconnect" template="twitter/connect/customer/connectbutton.phtml" />
+		</reference>
+
+		<block type="twitterconnect/custom_connectbutton" name="custom.twitterconnect" template="twitter/connect/custom/connectbutton.phtml" />
+	</default>
+
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="twitterconnect"><name>twitterconnect</name><path>twitterconnect/manage/</path><label>Twitter Connect</label></action>
+        </reference>
+    </customer_account>
+	
+	<twitterconnect_login_index>
+        <reference name="root">
+            <action method="setTemplate"><template>twitter/connect/popup.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="twitterconnect/login" name="twitterconnect.login" template="twitter/connect/login.phtml"/>
+        </reference>
+	</twitterconnect_login_index>
+
+    <twitterconnect_manage_index translate="label">
+        <label>Customer My Account Twitter Post</label>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="twitterconnect/customer_form_twitterconnect" name="customer_twitterconnect" template="twitter/connect/customer/form/twitterconnect.phtml">
+                <block type="page/html_wrapper" name="customer.twitterconnect.form.before" as="twitterconnect_form_before" translate="label">
+                    <label>Twitter Connect Form Before</label>
+                    <action method="setMayBeInvisible"><value>1</value></action>
+                </block>
+            </block>
+        </reference>
+    </twitterconnect_manage_index>
+</layout>

@@ -1,0 +1,143 @@
+<?php
+/**
+ * @var $this		Mage_Catalog_Block_Product_View_Media
+ * @var $_product	Mage_Catalog_Model_Product
+ */
+?>
+<?php
+	$_product = $this->getProduct();
+	$_helper = $this->helper('catalog/output');
+	$czoomHelper = Mage::helper('infortis_cloudzoom');
+
+	//Get main and thumbnail image sizes from admin config. If height is not specified, aspect ratio will be kept.
+    $imgWidth	= intval(Mage::getStoreConfig('themeadmin/images/product_main_width', Mage::app()->getStore()->getId()));
+	$imgHeight	= intval(Mage::getStoreConfig('themeadmin/images/product_main_height', Mage::app()->getStore()->getId()));
+	$thumbImgWidth	= intval(Mage::getStoreConfig('themeadmin/images/product_thumbnail_width', Mage::app()->getStore()->getId()));
+	$thumbImgHeight	= intval(Mage::getStoreConfig('themeadmin/images/product_thumbnail_height', Mage::app()->getStore()->getId()));
+	
+	//If main image width is not specified, use default values
+    if ($imgWidth <= 0) {
+		$imgWidth = 265;
+		$imgHeight = 265;
+	}
+	
+	//If thumbnail image width is not specified, use default values
+    if ($thumbImgWidth <= 0) {
+		$thumbImgWidth = 56;
+		$thumbImgHeight = 56;
+	} //echo 'width=' . $imgWidth. ' height=' .$imgHeight;
+	
+	/**
+	 * Get image URL for given product
+	 *
+	 * @param Mage_Catalog_Block_Product_View_Media $t
+	 * @param Mage_Catalog_Model_Product $prod Product
+	 * @param int $w Width
+	 * @param int $h Height
+	 * @param string $imgVersion Normal, small or thumbnail image
+	 * @param $f Specific file
+	 * @return string
+	 */
+	function getImgUrl($t, $prod, $w, $h, $imgVersion='image', $f=NULL)
+	{
+		$imgUrl = '';
+		if ($h <= 0)
+			$imgUrl = $t->helper('catalog/image')->init($prod, $imgVersion, $f)
+				->constrainOnly(TRUE)
+				->keepAspectRatio(TRUE)
+				->keepFrame(FALSE)
+				->resize($w);
+		else $imgUrl = $t->helper('catalog/image')->init($prod, $imgVersion, $f)->resize($w, $h);
+		return $imgUrl;
+	}
+	
+	//Get Cloud Zoom config
+	$position       = $czoomHelper->getCfgGeneral('position');
+	$lensOpacity    = intval($czoomHelper->getCfgGeneral('lens_opacity')) / 100;
+	$zoomWidth      = intval($czoomHelper->getCfgGeneral('zoom_width'));
+	$zoomHeight     = intval($czoomHelper->getCfgGeneral('zoom_height'));
+	$bigImageWidth  = intval($czoomHelper->getCfgGeneral('big_image_width'));
+	$bigImageHeight = intval($czoomHelper->getCfgGeneral('big_image_height'));
+	$tintColor      = trim($czoomHelper->getCfgGeneral('tint_color'));
+	$tintOpacity    = intval($czoomHelper->getCfgGeneral('tint_opacity')) / 100;
+	$softFocus		= intval($czoomHelper->getCfgGeneral('soft_focus'));
+	$smoothMove		= intval($czoomHelper->getCfgGeneral('smooth_move'));
+?>
+
+<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+
+	<?php
+        //Create Cloud Zoom config array
+        $zoomConfig = array(
+            "position:'{$position}'",
+            "showTitle:false",
+            "lensOpacity:{$lensOpacity}",
+            "smoothMove:{$smoothMove}",
+        );
+        
+        if ($zoomWidth) {
+            $zoomConfig[] = "zoomWidth:{$zoomWidth}";
+        }
+        if ($zoomHeight) {
+            $zoomConfig[] = "zoomHeight:{$zoomHeight}";
+        }
+    
+        //Right and bottom: move 10px (+ 2 * 1px border). Left and top: move -10px (- 2 * 1px border).
+        if ($position == 'inside') {
+            $zoomConfig[] = 'adjustX:0,adjustY:0';
+        } elseif ($position == 'right') {
+            $zoomConfig[] = 'adjustX:15,adjustY:-6';
+        } elseif ($position == 'bottom') {
+            $zoomConfig[] = 'adjustX:-6,adjustY:10';
+        } elseif ($position == 'left') {
+            $zoomConfig[] = 'adjustX:-12,adjustY:-6';
+        } elseif ($position == 'top') {
+            $zoomConfig[] = 'adjustX:-6,adjustY:-12';
+        }
+
+        if ($tintColor) {
+            $zoomConfig[] = "tint:'{$tintColor}',tintOpacity:{$tintOpacity}";
+        }
+        if ($softFocus) {
+            $zoomConfig[] = "softFocus:{$softFocus}";
+        }
+        if ($smoothMove > 1) {
+            $zoomConfig[] = "smoothMove:{$smoothMove}";
+        }
+    ?>
+
+    <p class="product-image<?php if($position == 'inside') echo ' zoom-inside'; ?>">
+        <a href="<?php echo getImgUrl($this, $_product, $bigImageWidth, $bigImageHeight); ?>" class="cloud-zoom" id="zoom1" rel="<?php echo implode($zoomConfig, ',');?>">
+            <img src="<?php echo getImgUrl($this, $_product, $imgWidth, $imgHeight); ?>" alt="<?php echo $this->htmlEscape($this->getImageLabel());?>" title="<?php echo $this->htmlEscape($this->getImageLabel());?>" width="<?php echo $imgWidth;?>" />
+        </a>
+    </p>
+    
+<?php else: ?>
+
+    <p class="product-image">
+        <?php
+            $_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize($imgWidth).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" width="'.$imgWidth.'" />';
+            echo $_helper->productAttribute($_product, $_img, 'image');
+        ?>
+    </p>
+
+<?php endif; ?>
+
+<?php if (count($this->getGalleryImages()) > 0): ?>
+<div class="more-views">
+    <h2><?php echo $this->__('More Views') ?></h2>
+    <ul>
+    <?php foreach ($this->getGalleryImages() as $_image): ?>
+		<?php //Skip, if no image
+        	if ($_image->getFile() == NULL)
+				continue; ?>
+        <li>
+            <a href='<?php echo getImgUrl($this, $_product, $bigImageWidth, $bigImageHeight, 'image', $_image->getFile()); ?>' class='cloud-zoom-gallery' title='<?php echo $this->htmlEscape($_image->getLabel()) ?>'
+            rel="useZoom: 'zoom1', smallImage: '<?php echo getImgUrl($this, $_product, $imgWidth, $imgHeight, 'image', $_image->getFile()); ?>' ">
+            	<img src="<?php echo getImgUrl($this, $_product, $thumbImgWidth, $thumbImgHeight, 'thumbnail', $_image->getFile()); ?>" width="<?php echo $thumbImgWidth; ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>"/>
+            </a>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

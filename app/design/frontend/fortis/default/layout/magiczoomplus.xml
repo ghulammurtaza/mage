@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="right.reports.product.viewed">
+        <!--<reference name="left.reports.product.viewed">-->
+            <action method="setTemplate">
+                <template>magiczoomplus/product_viewed.phtml</template>
+            </action>
+        </reference>
+    </default>
+    <catalog_category_layered_nochildren>
+        <reference name="left.reports.product.viewed">
+            <action method="setTemplate">
+                <template>magiczoomplus/product_viewed.phtml</template>
+            </action>
+        </reference>
+    </catalog_category_layered_nochildren>
+    <catalog_product_view>
+        <reference name="head">
+            <block type="core/template" name="magiczoomplus_header" template="magiczoomplus/header.phtml" />
+        </reference>
+        <reference name="product.info.media">
+            <action method="setTemplate">
+                <template>magiczoomplus/media.phtml</template>
+            </action>
+        </reference>
+    </catalog_product_view>
+    <!--<PRODUCT_TYPE_configurable>
+        <reference name="product.info.options.configurable">
+            <action method="setTemplate">
+                <template>magiczoomplus/configurable.phtml</template>
+            </action>
+        </reference>
+    </PRODUCT_TYPE_configurable>-->
+    <review_product_list>
+        <reference name="head">
+            <block type="core/template" name="magiczoomplus_header" template="magiczoomplus/header.phtml" />
+        </reference>
+        <reference name="product.info.media">
+            <action method="setTemplate">
+                <template>magiczoomplus/media.phtml</template>
+            </action>
+        </reference>
+    </review_product_list>
+    <catalog_category_default>
+        <reference name="head">
+            <block type="core/template" name="magiczoomplus_header" template="magiczoomplus/header.phtml" />
+        </reference>
+        <reference name="product_list">
+            <action method="setTemplate">
+                <template>magiczoomplus/list.phtml</template>
+            </action>
+        </reference>
+    </catalog_category_default>
+    <catalog_category_layered>
+        <reference name="head">
+            <block type="core/template" name="magiczoomplus_header" template="magiczoomplus/header.phtml" />
+        </reference>
+        <reference name="product_list">
+            <action method="setTemplate">
+                <template>magiczoomplus/list.phtml</template>
+            </action>
+        </reference>
+    </catalog_category_layered>
+    <catalogsearch_result_index>
+        <reference name="head">
+            <block type="core/template" name="magiczoomplus_header" template="magiczoomplus/header.phtml" />
+        </reference>
+        <reference name="search_result_list">
+            <action method="setTemplate">
+                <template>magiczoomplus/list.phtml</template>
+            </action>
+        </reference>
+    </catalogsearch_result_index>
+    <catalogsearch_advanced_result>
+        <reference name="head">
+            <block type="core/template" name="magiczoomplus_header" template="magiczoomplus/header.phtml" />
+        </reference>
+        <reference name="search_result_list">
+            <action method="setTemplate">
+                <template>magiczoomplus/list.phtml</template>
+            </action>
+        </reference>
+    </catalogsearch_advanced_result>
+    <cms_page>
+        <reference name="head">
+            <block type="core/template" name="magiczoomplus_header" template="magiczoomplus/header.phtml" />
+        </reference>
+        <!--<reference name="home.catalog.product.new">
+            <action method="setTemplate">
+                <template>magiczoomplus/new.phtml</template>
+            </action>
+        </reference>-->
+    </cms_page>
+</layout>

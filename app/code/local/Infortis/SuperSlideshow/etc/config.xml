@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category	Infortis
+ * @package		Infortis_SuperSlideshow
+ * @author		Infortis
+ * @copyright	Copyright 2012 Infortis
+ * @version:    1.0.0
+ */
+-->
+<config>
+    <modules>
+        <Infortis_SuperSlideshow>
+            <version>1.0.0</version>
+        </Infortis_SuperSlideshow>
+    </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <superslideshow>
+                    <file>infortis_superslideshow.xml</file>
+                </superslideshow>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <models>
+            <superslideshow>
+                <class>Infortis_SuperSlideshow_Model</class>
+            </superslideshow>
+        </models>
+        <blocks>
+            <superslideshow>
+                <class>Infortis_SuperSlideshow_Block</class>
+            </superslideshow>
+        </blocks>
+        <helpers>
+            <superslideshow>
+                <class>Infortis_SuperSlideshow_Helper</class>
+            </superslideshow>
+        </helpers>
+    </global>
+	<default>
+		<superslideshow>
+			<general>
+				<enabled>1</enabled>
+				<directory>infortis/_home/slideshow</directory>
+				<files>test01.png,test02.png</files>
+				<fx>scrollHorz</fx>
+				<easing>easeInOutCubic</easing>
+				<timeout>10000</timeout>
+				<speed_out>800</speed_out>
+				<speed_in>800</speed_in>
+				<sync>1</sync>
+				<pause>1</pause>
+				<fit>0</fit>
+			</general>
+		</superslideshow>
+	</default>
+</config>

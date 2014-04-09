@@ -1,0 +1,146 @@
+
+/* Only 2nd level (first subcategory)
+-------------------------------------------------------------- */
+#nav ul.level0,
+#nav > li div {
+	position:absolute;	
+	top:41px;
+	left:-10000px;
+	padding:25px 21px 5px;
+	background-color:#fff;
+	width:918px; /*960 - padding*/
+	display:none; /* IMPORTANT: display it when 'shown-sub' class is applied */
+	/*z-index:2000;*/ /*Deprecated*/
+	/* +Common shadow styles for multiple items */
+}
+/* If list is wrapped in additional DIV */
+/*#nav div ul { position:static; width:auto; border:none; }*/
+
+/* 2-level links block: with subcategory title and a list of child categories */
+#nav ul.level0 > li {
+	float:left;
+	width:145px; /*6 columns*/
+	margin-right:4px;
+	margin-left:4px;
+	padding-bottom:20px;
+}
+#nav ul.level0 > li.last {}
+#nav ul.level0 > li > a {
+	padding:10px;
+	margin-bottom:10px;
+	font-size:14px;
+	color:#ce001a;
+	background-color:#f5f5f5;
+}
+#nav ul.level0 > li > a:hover { color:#066cc3; background-color:#f9f9f9; }
+
+/* 2nd level
+-------------------------------------------------------------- */
+#nav ul li a { float:none; }
+#nav ul li.parent {}
+
+/* 3rd level
+-------------------------------------------------------------- */
+#nav ul ul,
+#nav ul div {
+	position:static !important;
+	width:auto;
+	padding:0 10px;
+}
+#nav ul ul li {
+	float:none;
+	margin:0;
+}
+
+/* 4th level
+-------------------------------------------------------------- */
+#nav ul.level2 { padding:5px 0 5px 8px; }
+#nav ul.level2 a { color:#aaa; font-size:11px; line-height:13px; }
+
+/* Show submenu
+-------------------------------------------------------------- */
+/* default: left:0; Move 8px left (navbar left corner width) */
+#nav li > ul.shown-sub,
+#nav li > div.shown-sub {
+	left:-8px;
+	display:block;
+	/* IMPORTANT: 'shown-sub' class is also inserted into static blocks displayed as a drop-down in the main menu */
+}
+
+
+
+/* Override number of columns (depending on width and padding) with 2-level links
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* 4 columns */
+.level2-col4	#nav ul.level0 > li {
+	width:221px;
+	margin-right:4px;
+	margin-left:4px;
+	padding-bottom:20px;
+}
+
+/* 5 columns */
+.level2-col5	#nav ul.level0 > li {
+	width:175px;
+	margin-right:4px;
+	margin-left:4px;
+	padding-bottom:20px;
+}
+
+/* 6 columns */
+.level2-col6	#nav ul.level0 > li {
+	width:145px;
+	margin-right:4px;
+	margin-left:4px;
+	padding-bottom:20px;
+}
+
+/* 7 columns */
+.level2-col7	#nav ul.level0 > li {
+	width:127px;
+	margin-right:2px;
+	margin-left:2px;
+	padding-bottom:15px;
+}
+.level2-col7	#nav ul.level0 > li > a { font-size:12px; }
+
+/* 8 columns */
+.level2-col8	#nav ul.level0 > li {
+	width:110px;
+	margin-right:2px;
+	margin-left:2px;
+	padding-bottom:10px;
+	/* font */
+	font-size:11px;
+}
+.level2-col8	#nav ul ul { padding-left:5px; padding-right:5px; }
+.level2-col8	#nav ul.level0 > li > a { padding: 10px 5px; margin-bottom:5px; font-size:12px; }
+
+
+/* Override color of the 1-level links
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+.level1-link-color-white	#nav > li > a { color:#fff; }
+.level1-link-color-black	#nav > li > a { color:#222; }
+
+
+
+/* Override text shadow of the 1-level links
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+.level1-link-no-shadow		#nav > li > a { text-shadow:none; }
+
+
+/* Override default styling of the 2-level links (main link in the column)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+.level2-link-gray-l-red		#nav ul.level0 > li > a { color:#ce001a; background-color:#f5f5f5; }
+.level2-link-gray-l-red		#nav ul.level0 > li > a:hover { background-color:#f9f9f9; }
+
+.level2-link-blue-l-blue	#nav ul.level0 > li > a { color:#066cc3; background-color:#e9f3fa; }
+.level2-link-blue-l-blue	#nav ul.level0 > li > a:hover { background-color:#d5e7f6; }
+
+.level2-link-gray-l-gray	#nav ul.level0 > li > a { color:#555; background-color:#eee; }
+.level2-link-gray-l-gray	#nav ul.level0 > li > a:hover { color:#333; background-color:#e5e5e5; }

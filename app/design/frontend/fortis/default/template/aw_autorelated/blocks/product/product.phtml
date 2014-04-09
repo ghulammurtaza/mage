@@ -1,0 +1,195 @@
+<?php
+    /**
+    * aheadWorks Co.
+    *
+    * NOTICE OF LICENSE
+    *
+    * This source file is subject to the EULA
+    * that is bundled with this package in the file LICENSE.txt.
+    * It is also available through the world-wide-web at this URL:
+    * http://ecommerce.aheadworks.com/AW-LICENSE-COMMUNITY.txt
+    *
+    * =================================================================
+    *                 MAGENTO EDITION USAGE NOTICE
+    * =================================================================
+    * This package designed for Magento COMMUNITY edition
+    * aheadWorks does not guarantee correct work of this extension
+    * on any other Magento edition except Magento COMMUNITY edition.
+    * aheadWorks does not provide extension support in case of
+    * incorrect edition usage.
+    * =================================================================
+    *
+    * @category   AW
+    * @package    AW_Autorelated
+    * @version    2.2.1
+    * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+    * @license    http://ecommerce.aheadworks.com/AW-LICENSE-COMMUNITY.txt
+    */
+?>
+<?php
+?>
+<?php
+    $abstractBlock = $this->helper('awautorelated')->getAbstractProductBlock();
+    //$collection = $this->getCollection();
+    //$collection = Mage::getModel('awautorelated/product')->getCollection();
+    $collection = Mage::getModel('awautorelated/product_collection');
+    $collection->addAttributeToSelect('*');
+    $_visibility = array(
+                Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH,
+                Mage_Catalog_Model_Product_Visibility::VISIBILITY_IN_CATALOG
+            );
+            $collection->addAttributeToFilter('visibility', $_visibility)
+                    ->addAttributeToFilter('status', array("in" => Mage::getSingleton("catalog/product_status")->getVisibleStatusIds()));
+    Mage::getSingleton('cataloginventory/stock')->addInStockFilterToCollection($collection);                
+    $collection->addStoreFilter(Mage::app()->getStore()->getId())
+                    ->groupByAttribute('entity_id');
+    $moduleName = Mage::app()->getFrontController()->getRequest()->getModuleName();
+    $_helper = $this->helper('catalog/output');
+    $themeHelper = $this->helper('themeadmin');
+    if($moduleName == 'checkout')
+    {
+        $cartHelper = Mage::helper('checkout/cart');
+        //Get all items from cart
+        $items = $cartHelper->getCart()->getItems();
+        $cartItemsCount = count($items);
+        if($cartItemsCount > 0)
+        {
+
+            if ($this->getPosition() == AW_Autorelated_Model_Source_Position::INSTEAD_NATIVE_RELATED_BLOCK) {
+
+                $this->iterateBlock();
+
+                if ($collection && $collection->getSize()) {
+                    $this->markAsShowed();
+                } elseif ($this->showNativeBlock()) {
+                    echo $this->getParent()->getChildHtml('catalog-product-related');
+                }
+            }
+        ?>
+        <?php 
+            $itemPerRow = 5;
+            $_columnCount = 5;
+            $_collectionSize = $collection->getSize();
+            $_paneCount = ceil($_collectionSize / $_columnCount);
+
+            list($usec, $sec) = explode(' ', microtime());
+            $randomSeed = (float) $sec + ((float) $usec * 100000);
+            mt_srand($randomSeed);
+            $r = mt_rand();
+        ?>
+        <div class="itemslider-wrapper custom_checkout">
+
+            <?php if($_paneCount > 1): ?>
+                <a id="itemslider-back-<?php echo $r; ?>" class="backward browse-button" href="#">previous</a>
+                <a id="itemslider-for-<?php echo $r; ?>" class="forward browse-button" href="#">next</a>
+                <div class="custom_interest_text"><?php echo $this->__('You may also be interested in the following book(s)') ?></div>
+                <?php endif; ?>
+            <div id="itemslider-<?php echo $r; ?>" class="itemslider">
+                <?php if ($collection && $collection->getSize()) : ?>
+
+                    <?php $i=0; foreach ($collection as $product) : ?>
+
+                        <?php if ($i++%$_columnCount==0): ?>
+                            <div class="slide">
+                                <ul class="products-grid spec-grid spec-grid<?php echo $_columnCount;?>col grid-wide grid-actions-absolute grid-standalone clearer">
+                                    <?php endif; ?>
+
+                                <li class="item<?php if(($i-1)%$itemPerRow==0): ?> first<?php elseif($i%$itemPerRow==0): ?> last<?php endif; ?>" >
+                                    <a href="<?php echo $abstractBlock->getProductUrl($product) ?>"><img src="<?php echo $this->helper('catalog/image')->init($product, 'thumbnail')->resize(141) ?>" alt="<?php echo $this->htmlEscape($product->getName()) ?>" width="141" height="141" /></a>
+                                    <a href="<?php echo $abstractBlock->getProductUrl($product) ?>"><?php echo $this->htmlEscape($product->getName()) ?></a>
+                                    <?php echo $abstractBlock->getPriceHtml($product, true, '-related') ?>
+
+
+                                </li>
+                                <?php
+                                    if($i%$_columnCount==0 || $i==$_collectionSize): 
+                                    ?>
+                                </ul>
+                            </div>
+                            <?php                
+                                endif;
+                        ?>
+                        <?php endforeach ?>
+
+
+                    <?php endif; ?> 
+            </div> <!--// Close div  itemslider -->
+        </div> <!--// Close div  itemslider-wrapper -->
+         <script type="text/javascript">
+
+        //<![CDATA[
+          jQuery(function() {
+            jQuery("#itemslider-<?php echo $r; ?>").cycle({
+              fx: 'scrollHorz',
+              easing: 'easeInOutCubic',
+              timeout: <?php echo '1000';//intval($themeHelper->getCfg('product_slider/timeout')); ?>,
+              speed: <?php echo intval($themeHelper->getCfg('product_slider/speed')); ?>,
+              sync: 1,
+              pause: 1,
+              prev: "#itemslider-back-<?php echo $r; ?>",
+              next: "#itemslider-for-<?php echo $r; ?>",
+              manualTrump: 0,
+              cleartypeNoBg: true
+            });
+          });
+        //]]>
+        </script>
+
+
+
+
+
+
+
+        <?php
+        }
+    }else{
+        // For Detail Page only
+        if ($this->getPosition() == AW_Autorelated_Model_Source_Position::INSTEAD_NATIVE_RELATED_BLOCK) {
+
+            $this->iterateBlock();
+
+            if ($collection && $collection->getSize()) {
+                $this->markAsShowed();
+            } elseif ($this->showNativeBlock()) {
+                echo $this->getParent()->getChildHtml('catalog-product-related');
+            }
+        }
+    ?>
+    <?php if ($collection && $collection->getSize()) : ?>
+        <?php if (Mage::helper('awautorelated')->checkVersion('1.4')): ?>
+            <div class="block block-related aw-arp-block aw-arp-block-<?php echo $this->getData('id') ?>">
+            <div class="block-title">
+                <strong><span><?php echo $this->htmlEscape($this->getData('name')) ?></span></strong>
+            </div>
+            <div class="block-content aw-arp-block-content">
+            <?php else: ?>
+            <div class="box base-mini mini-related-items aw-arp-block aw-arp-block-<?php echo $this->getData('id') ?>">
+                <div class="head">
+                    <h4><?php echo $this->htmlEscape($this->getData('name')) ?></h4>
+                </div>
+                <div class="content aw-arp-block-content">
+                    <?php endif; ?>
+                <ul>
+                    <?php $k=1; ?>
+                    <?php foreach ($collection as $product) : ?>
+                        <li class="aw-arp-item<?php if($k%2==0) echo ' last'; ?>" style=" float: left;margin-right: 10px;">
+                            <a href="<?php echo $abstractBlock->getProductUrl($product) ?>"><img src="<?php echo $this->helper('catalog/image')->init($product, 'thumbnail')->resize(75) ?>" alt="<?php echo $this->htmlEscape($product->getName()) ?>" width="75" height="75" /></a><br />
+                            <a href="<?php echo $abstractBlock->getProductUrl($product) ?>"><?php echo $this->htmlEscape($product->getName()) ?></a><br />
+                            <?php echo $abstractBlock->getPriceHtml($product, true, '-related') ?>
+                            <?php if ($product->isSaleable()) : ?>
+                                <div class="aw-arp-addtocart"><p><a class="link-cart" href="<?php echo $abstractBlock->getAddToCartUrl($product) ?>"><?php echo $this->__('Add to Cart') ?></a></p></div>
+                                <?php else : ?>
+                                <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                                <?php endif ?>
+                            <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                                <a href="<?php echo $abstractBlock->getAddToWishlistUrl($product) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a>
+                                <?php endif; ?>
+                        </li>
+                        <?php $k++; ?>
+                        <?php endforeach ?>
+                </ul>
+            </div>
+        </div>
+        <?php endif; ?>
+    <?php } ?>

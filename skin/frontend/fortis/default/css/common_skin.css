@@ -1,0 +1,304 @@
+/**
+ * Skin options for selected elements.
+ */
+
+/* Main navigation container (main menu) %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+
+/* Override default background image by additional class in the wrapper */
+/* 'navbar-bg' class indicates three elements using the same background */
+.navbar-gray-l .navbar-bg		{ background-image:url(../images/img/navbar-gray-l.png); }
+.navbar-gray-d .navbar-bg		{ background-image:url(../images/img/navbar-gray-d.png); }
+.navbar-green-pea .navbar-bg	{ background-image:url(../images/img/navbar-green-pea.png); }
+.navbar-green-pea-d .navbar-bg	{ background-image:url(../images/img/navbar-green-pea-d.png); }
+.navbar-blue .navbar-bg			{ background-image:url(../images/img/navbar-blue.png); }
+.navbar-navy .navbar-bg			{ background-image:url(../images/img/navbar-navy.png); }
+.navbar-orange .navbar-bg		{ background-image:url(../images/img/navbar-orange.png); }
+.navbar-crimson .navbar-bg		{ background-image:url(../images/img/navbar-crimson.png); }
+.navbar-red .navbar-bg			{ background-image:url(../images/img/navbar-red.png); }
+.navbar-red-saturated .navbar-bg{ background-image:url(../images/img/navbar-red-saturated.png); }
+.navbar-red-d .navbar-bg		{ background-image:url(../images/img/navbar-red-d.png); }
+
+
+/* Header %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+
+/* Background
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* Main background
+-------------------------------------------------------------- */
+.header-container.header-bg-gray-vl		{ background-image:url(../images/img/header-gray-vl.png); }
+.header-container.header-bg-gray-l		{ background-image:url(../images/img/header-gray-l.png); }
+.header-container.header-bg-gray		{ background-image:url(../images/img/header-gray.png); }
+.header-container.header-bg-gray-d		{ background-image:url(../images/img/header-gray-d.png); }
+.header-container.header-bg-gray-vd		{ background-image:url(../images/img/header-gray-vd.png); }
+.header-container.header-bg-blue-pale-l	{ background-image:url(../images/img/header-blue-pale-l.png); }
+.header-container.header-bg-navy		{ background-image:url(../images/img/header-navy.png); }
+
+/* Gradient above the background
+-------------------------------------------------------------- */
+.header-bg-gray-vd .header-container2,
+.header-bg-gray-d .header-container2,
+.header-bg-navy .header-container2 { background-image:url(../images/img/top-bg-plus.png); }
+.header-bg-gray-vl .header-container2,
+.header-bg-gray-l .header-container2,
+.header-bg-gray .header-container2,
+.header-bg-blue-pale-l .header-container2 { background-image:url(../images/img/top-bg-plus-l.png); }
+
+
+/* Dark color of text/elements for light background
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* Header */
+.header-skin-d .header { color:#000; }
+.header-skin-d .header a { color:#000; }
+.header-skin-d .header a:hover { color:#555; }
+
+/* Header top - links */
+.header-skin-d .header-top-links-wrapper li { border-right:1px solid rgba(0,0,0, 0.1); }
+
+/* Dropdown switcher */
+.header-skin-d .top-dropdown:hover { color:#555; }
+.header-skin-d .top-dropdown ul { background:none; background-color:#fff; }
+.header-skin-d .dropdown .text { background-image:url(../images/img/arrow-dropdown-gray-d.png); }
+
+/* Header top - help */
+.header-skin-d .header-top .header-top-help-wrapper .phone { background-image:url(../images/img/ic-phone-black.png); }
+
+/* Form search */
+.header-skin-d .header .form-search .input-text { background-color:#f5f5f5; color:#555; }
+.header-skin-d .header .form-search .input-text:hover,
+.header-skin-d .header .form-search .input-text:focus { background-color:#fff; color:#000; }
+
+
+/* Medium dark color of text/elements for light background
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* Header */
+.header-skin-md .header { color:#555; }
+.header-skin-md .header a { color:#555; }
+.header-skin-md .header a:hover { color:#000; }
+
+/* Header top - links */
+.header-skin-md .header-top-links-wrapper li { border-right:1px solid rgba(0,0,0, 0.1); }
+
+/* Dropdown switcher */
+.header-skin-md .top-dropdown:hover { color:#000; }
+.header-skin-md .top-dropdown ul { background:none; background-color:#fff; }
+.header-skin-md .dropdown .text { background-image:url(../images/img/arrow-dropdown-gray-d.png); }
+
+/* Header top - help */
+.header-skin-md .header-top .header-top-help-wrapper .phone { background-image:url(../images/img/ic-phone-gray-d.png); }
+
+/* Form search */
+.header-skin-md .header .form-search .input-text { background-color:#f5f5f5; color:#777; }
+.header-skin-md .header .form-search .input-text:hover,
+.header-skin-md .header .form-search .input-text:focus { background-color:#fff; color:#555; }
+
+
+/* Light color of text/elements for dark background
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* Header */
+.header-skin-l .header { color:#bbb; }
+.header-skin-l .header a { color:#bbb; }
+.header-skin-l .header a:hover { color:#fff; }
+
+/* Header top - links */
+.header-skin-l .header-top-links-wrapper li { border-right:1px solid rgba(255,255,255, 0.1); }
+
+/* Dropdown switcher */
+.header-skin-l .top-dropdown:hover { color:#fff; }
+/*.header-skin-l .top-dropdown ul { background:none; background-color:#fff; }*/
+
+/* Header top - help */
+.header-skin-l .header-top .header-top-help-wrapper .phone { background-image:url(../images/img/ic-phone-gray-l.png); }
+
+
+
+
+/* User menu skin: transparent black (5%), black icons
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* User menu
+-------------------------------------------------------------- */
+.user-menu-skin-b0b .user-menu > ul > li {
+	background-color:rgba(0,0,0, 0.05);
+	background-image:url(../images/img/dark/ic-toplinks-wishlist.png); /* Default icon for links is wishlist icon */
+}
+.user-menu-skin-b0b .user-menu > ul > li:hover {
+	background-color:rgba(0,0,0, 0.15);
+}
+.user-menu-skin-b0b .user-menu > ul > li.item-1 			{ background-image:url(../images/img/dark/ic-toplinks-account.png); }
+.user-menu-skin-b0b .user-menu > ul > li.item-2 			{ background-image:url(../images/img/dark/ic-toplinks-wishlist.png); }
+.user-menu-skin-b0b .user-menu > ul > li.item-3 			{ background-image:url(../images/img/dark/ic-toplinks-log.png); }
+/* Default icon for all custom links after the "Log In" link" */
+.user-menu-skin-b0b .user-menu > ul > li.item-4,
+.user-menu-skin-b0b .user-menu > ul > li.item-5,
+.user-menu-skin-b0b .user-menu > ul > li.item-6,
+.user-menu-skin-b0b .user-menu > ul > li.item-7 			{ background-image:url(../images/img/dark/ic-toplinks-default.png); }
+.user-menu-skin-b0b .user-menu > ul > li.user-menu-signup	{ background-image:url(../images/img/dark/ic-toplinks-signup.png); }
+.user-menu-skin-b0b .user-menu > ul > li.user-menu-custom	{ background-image:url(../images/img/dark/ic-toplinks-custom.png); }
+.user-menu-skin-b0b .user-menu > ul > li.user-menu-cart	{ background-image:none; }
+
+.user-menu-skin-b0b .user-menu > ul > li > a { color:#444; }
+.user-menu-skin-b0b .user-menu > ul > li:hover > a { color:#222; }
+
+.user-menu-skin-b0b .user-menu .user-menu-item { color:#444; }
+.user-menu-skin-b0b .user-menu .user-menu-item:hover { color:#222; }
+
+/* Mini-cart
+-------------------------------------------------------------- */
+.user-menu-skin-b0b #mini-cart .block-title .heading { background-position:-70px -205px; }
+.user-menu-skin-b0b #mini-cart:hover .block-title .heading { background-position:-70px -205px; }
+
+.user-menu-skin-b0b #mini-cart .block-title .summary a { color:#555; }
+.user-menu-skin-b0b #mini-cart .block-title .to-checkout a { color:#044e8f; }
+.user-menu-skin-b0b #mini-cart .block-title .to-checkout .icon { background-position:-27px -177px; }
+
+
+/* User menu skin: transparent white (30%), black icons
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+/* User menu
+-------------------------------------------------------------- */
+.user-menu-skin-w3b .user-menu > ul > li {
+	background-color:rgba(255,255,255, 0.3);
+	background-image:url(../images/img/dark/ic-toplinks-wishlist.png); /* Default icon for links is wishlist icon */
+}
+.user-menu-skin-w3b .user-menu > ul > li:hover {
+	background-color:rgba(255,255,255, 0.5);
+}
+.user-menu-skin-w3b .user-menu > ul > li.item-1 			{ background-image:url(../images/img/dark/ic-toplinks-account.png); }
+.user-menu-skin-w3b .user-menu > ul > li.item-2 			{ background-image:url(../images/img/dark/ic-toplinks-wishlist.png); }
+.user-menu-skin-w3b .user-menu > ul > li.item-3 			{ background-image:url(../images/img/dark/ic-toplinks-log.png); }
+/* Default icon for all custom links after the "Log In" link" */
+.user-menu-skin-w3b .user-menu > ul > li.item-4,
+.user-menu-skin-w3b .user-menu > ul > li.item-5,
+.user-menu-skin-w3b .user-menu > ul > li.item-6,
+.user-menu-skin-w3b .user-menu > ul > li.item-7 			{ background-image:url(../images/img/dark/ic-toplinks-default.png); }
+.user-menu-skin-w3b .user-menu > ul > li.user-menu-signup	{ background-image:url(../images/img/dark/ic-toplinks-signup.png); }
+.user-menu-skin-w3b .user-menu > ul > li.user-menu-custom	{ background-image:url(../images/img/dark/ic-toplinks-custom.png); }
+.user-menu-skin-w3b .user-menu > ul > li.user-menu-cart		{ background-image:none; }
+
+.user-menu-skin-w3b .user-menu > ul > li > a { color:#444; }
+.user-menu-skin-w3b .user-menu > ul > li:hover > a { color:#222; }
+
+.user-menu-skin-w3b .user-menu .user-menu-item { color:#444; }
+.user-menu-skin-w3b .user-menu .user-menu-item:hover { color:#222; }
+
+/* Mini-cart
+-------------------------------------------------------------- */
+.user-menu-skin-w3b #mini-cart .block-title .heading { background-position:-70px -205px; }
+.user-menu-skin-w3b #mini-cart:hover .block-title .heading { background-position:-70px -205px; }
+
+.user-menu-skin-w3b #mini-cart .block-title .summary a { color:#555; }
+.user-menu-skin-w3b #mini-cart .block-title .to-checkout a { color:#044e8f; }
+.user-menu-skin-w3b #mini-cart .block-title .to-checkout .icon { background-position:-27px -177px; }
+
+
+
+/* Footer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+
+/* Footer background
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+
+.footer-container.footer-bg-gray-vl	{ background-image:url(../images/img/footer-gray-vl.png); }
+.footer-container.footer-bg-gray-l	{ background-image:url(../images/img/footer-gray-l.png); }
+.footer-container.footer-bg-gray	{ background-image:url(../images/img/footer-gray.png); }
+.footer-container.footer-bg-gray-d	{ background-image:url(../images/img/footer-gray-d.png); }
+.footer-container.footer-bg-gray-vd	{ background-image:url(../images/img/footer-gray-vd.png); }
+
+
+/* Light skin for dark background
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+.footer-skin-light .footer { color:#999; }
+.footer-skin-light .footer a { color:#959595; }
+.footer-skin-light .footer a:hover { color:#6099c5; }
+.footer-skin-light .footer .heading { color:#ddd; }
+
+/* Top of the footer
+-------------------------------------------------------------- */
+.footer-skin-light .footer-top ul a { color:#555; }
+
+/* Main footer bottom
+-------------------------------------------------------------- */
+/* Wrappers for footer content */
+.footer-skin-light .footer-item { background-color:rgba(255,255,255,0.05); }
+
+/* Static CMS block with column of links */
+.footer-skin-light .footer-company-wrapper .phone { color:#6099c5; }
+
+/* Newsletter */
+.footer-skin-light #subscribe-form .input-text { color:#000; }
+
+
+
+/* Effects %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+
+/* Product image (and other elements)
+-------------------------------------------------------------- */
+.product-image img {
+	transition:			opacity 300ms ease-in-out;
+	-moz-transition:	opacity 300ms ease-in-out;
+	-webkit-transition:	opacity 300ms ease-in-out;
+	-o-transition:		opacity 300ms ease-in-out;
+}
+.product-image img:hover { opacity:0.8; }
+
+
+/* All links
+-------------------------------------------------------------- */
+a {
+	transition:			color 300ms ease-in-out, background-color 300ms ease-in-out;
+	-moz-transition:	color 300ms ease-in-out, background-color 300ms ease-in-out;
+	-webkit-transition:	color 300ms ease-in-out, background-color 300ms ease-in-out;
+	-o-transition:		color 300ms ease-in-out, background-color 300ms ease-in-out;
+}
+a:hover {
+	opacity:1;
+	transition:			opacity 300ms;
+	-moz-transition:	opacity 300ms;
+	-webkit-transition:	opacity 300ms;
+	-o-transition:		opacity 300ms;
+}
+
+/* Top links
+-------------------------------------------------------------- */
+.user-menu > ul > li {
+	transition:			background-color 300ms ease-in-out;
+	-moz-transition:	background-color 300ms ease-in-out;
+	-webkit-transition:	background-color 300ms ease-in-out;
+	-o-transition:		background-color 300ms ease-in-out;
+}
+.user-menu > ul > li:hover {
+/*	opacity:1;
+	transition:			opacity 300ms ease-in-out;
+	-moz-transition:	opacity 300ms ease-in-out;
+	-webkit-transition:	opacity 300ms ease-in-out;
+	-o-transition:		opacity 300ms ease-in-out;*/
+}
+.user-menu > ul > li > a {
+	transition:			color 300ms ease-in-out;
+	-moz-transition:	color 300ms ease-in-out;
+	-webkit-transition:	color 300ms ease-in-out;
+	-o-transition:		color 300ms ease-in-out;
+}
+.user-menu > ul > li:hover > a {
+	opacity:1;
+	transition:			opacity 300ms;
+	-moz-transition:	opacity 300ms;
+	-webkit-transition:	opacity 300ms;
+	-o-transition:		opacity 300ms;
+}

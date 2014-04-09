@@ -1,0 +1,335 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<script type="text/javascript" src="http://apis.google.com/js/plusone.js"></script>
+<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php $themeHelper = $this->helper('themeadmin'); ?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+    
+</script>
+<div class="social-links">
+  <div  class="fb-like" data-href="<?php echo  $_product->getProductUrl()?>" data-send="true" data-layout="box_count" data-width="450" data-show-faces="false"></div>
+<div class="clr"></div>  
+  <g:plusone href="<?php echo  $_product->getProductUrl()?>" size="tall" expandTo="right"></g:plusone>
+<div class="clr"></div>  
+                       <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $_product->getProductUrl()?>" data-count="vertical" >Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<div class="clr"></div>  
+                            <a href="http://pinterest.com/pin/create/button/?url=<?php echo  $_product->getProductUrl()?>&media=http%3A%2F%2Fpassets-lt.pinterest.com%2Fimages%2Fabout%2Fbuttons%2Fpinterest-button.png" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a>
+   <div class="clr"></div>                           
+</div>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="product-view">
+    <?php //my:del <div class="product-essential"> ?>
+    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
+        
+        <div class="product-top-wrapper">
+			<div class="product-top">
+				<div class="product-top-inner clearer">
+                
+					<?php if ($rightBoxEnabled = $themeHelper->getCfg('products/product_right_box_enabled')): ?>
+                        <div class="product-attributes">
+    
+                            <?php echo $this->getChildHtml('product_attributes_placeholder'); //Placeholder for brands ?>
+                            
+                            <?php if ($tmp_html = $this->getChildHtml('i_block_product_right_bottom')): ?>
+                                <div class="product-right-bottom-wrapper"><?php echo $tmp_html; ?></div>
+                            <?php endif; ?>
+    
+                        </div> <!-- end: product-attributes -->
+                    <?php endif; ?>
+                    
+                    <?php
+                    	//Count image box width and "product-shop" width based on image width
+						$newImgWidth = trim($themeHelper->getCfg('images/product_main_width'));
+						$defImgWidth = 265;					//Default image width
+						$imgBoxWidth = $defImgWidth + 12;	//Default image box ("product-img-box" class) width
+						$centerBoxWidth = 397;				//Default central box ("product-shop" class) width
+						if ($rightBoxEnabled == false) $centerBoxWidth += 240; //If no right box, add its width to central box width
+						if ($newImgWidth > 0)
+						{
+							$diff = $newImgWidth - $defImgWidth;
+							$imgBoxWidth += $diff;
+							$centerBoxWidth -= $diff;
+						}
+					?>
+                    
+                    <div class="product-shop<?php if($rightBoxEnabled==false) echo ' no-right-border'; ?>"<?php if($newImgWidth) echo " style=\"width:{$centerBoxWidth}px;\"";?>>
+
+                        <div class="product-name">
+                            <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                        </div>
+                        
+                         <?php echo $this->getReviewsSummaryHtml($_product, false, true); //reviews ?>
+                       
+                       <?php if ($_product->getShortDescription()): ?>
+                            <div class="short-description">
+                                <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+                            </div>
+                        <?php endif;?>
+                       
+                        <?php ///$home_url = Mage::helper('core/url')->getHomeUrl(); ?>   
+                        <!--<div class="custom_author" style="font-size: 10px; font-style: italic;">
+                            <a href="<?php echo $home_url.'catalogsearch/result/?q='.$_product->getResource()->getAttribute('author')->getFrontend()->getValue($_product); ?>">
+                                <?php
+                                    // --------------- Custom code --------------------------
+                                       //echo 'Author: '.$_product->getAuthorName();
+                                       echo $_product->getResource()->getAttribute('author')->getFrontend()->getValue($_product);
+                                    // --------------- Custom code --------------------------
+                  
+                                ?>
+                            </a>
+                        </div>-->
+                     
+                        
+                        
+                        
+                        <?php if ($extrahint_html = $this->getChildHtml('extrahint')): //qty increments ?>
+                        	<div class="extrahint-wrapper"><?php echo $extrahint_html; ?></div>
+						<?php endif; ?>
+						
+                        <?php //Display hidden price outside 'product-type-data' box.
+						      //Price is displayed if product can have options which change the total price, but only
+						      //if product IS NOT of these types: bundle, grouped, downloadable. ?>
+						<?php if (
+								$_product->isSaleable()
+								&& $_product->getTypeId() != Mage_Catalog_Model_Product_Type::TYPE_BUNDLE
+								&& $_product->getTypeId() != Mage_Catalog_Model_Product_Type::TYPE_GROUPED
+								//&& $_product->getTypeId() != Mage_Downloadable_Model_Product_Type::TYPE_DOWNLOADABLE
+								): ?>
+							<?php if ($_product->isConfigurable() || $this->hasOptions()): ?>
+								<div style="display:none;"><?php echo $this->getPriceHtml($_product); ?></div>
+							<?php endif; ?>
+						<?php endif; ?>
+                        
+                        <?php //Only X left, availability and other product type specific data.
+						      //The following product types have a separate template files for product type specific info
+							  //(so catalog/product/view/type/default.phtml is not being used for these product types):
+							  //bundle, grouped, downloadable. ?>
+						<?php if ($type_html = trim($this->getChildHtml('product_type_data'))): ?>
+							<div class="product-type-data<?php if($_product->isGrouped()) echo " is-grouped"; if($_product->getTypeId() == Mage_Downloadable_Model_Product_Type::TYPE_DOWNLOADABLE) echo " is-downloadable"; ?>"><?php echo $type_html; ?></div>
+                        <?php endif; ?>
+
+                        <?php echo $this->getTierPriceHtml(); //tier prices ?>
+    
+                        <?php if (!$this->hasOptions()): //add to cart when no options ?>
+							<?php if($_product->isSaleable()): ?>
+                                <div class="add-to-box">
+                                    <?php echo $this->getPriceHtml($_product); ?>
+                                    <?php echo $this->getChildHtml('addtocart') ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php echo $this->getChildHtml('extra_buttons') ?>
+                        <?php endif; ?>
+
+                        <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+							<?php if ($container1_html = $this->getChildChildHtml('container1', '', true, true)): ?>
+                            	<div class="container1-wrapper"><?php echo $container1_html; ?></div>
+                            <?php endif; ?>
+                        <?php endif;?>
+                        
+                        <?php if ($addto_box_html = $this->getChildHtml('addto')): //compare, wishlist ?>
+                        	<div class="action-box clearer"><?php echo $addto_box_html; ?></div>
+                        <?php endif; ?>
+                        
+                        <div class="product-collateral attribute">
+                            <?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
+                            <div class="box-collateral <?php echo "box-{$alias}"?>">
+                            
+                            <?php echo $html; ?>
+                            </div>
+                            <?php endforeach;?>
+                            </div>
+                        
+                        <?php echo $this->getChildHtml('alert_urls'); //alerts ?>
+                        <?php echo $this->getChildHtml('other'); ?>
+                        
+                        <?php if ($tmp_html = $this->getChildHtml('i_block_product_main_bottom')): ?> <?php //Predefined CMS block ?>
+                        	<div class="product-main-bottom-wrapper"><?php echo $tmp_html; ?></div>
+                        <?php endif; ?>
+
+                    </div> <!-- end: product-shop -->
+
+                    <div class="product-img-box"<?php if($newImgWidth) echo " style=\"width:{$imgBoxWidth}px;\"";?>>
+						<?php echo $this->getChildHtml('media') ?>
+						<?php // Product labels "new" and "sale"
+                        	echo $this->getChildHtml('media_labels'); ?>
+                    </div>
+                </div> <!-- end: product-top-inner -->
+			</div> <!-- end: product-top -->
+		</div> <!-- end: product-top-wrapper -->
+        <div class="autorelated-products"> <?php echo $this->getChildHtml('awautorelated2') ?> </div>
+        <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+			<?php if ($container2_html = $this->getChildChildHtml('container2', '', true, true)): ?>
+        		<div class="container2-wrapper"><?php echo $container2_html; ?></div>
+        	<?php endif; ?>
+        <?php endif; ?>
+        
+        <?php // Related products
+		$replaceRelated = $themeHelper->getCfg('products/replace_related');
+		if ($replaceRelated == 0) //never replace
+		{
+			echo '<div class="block-related-wrapper">' . $this->getChildHtml('catalog.product.related') . '</div>';
+		}
+		elseif ($replaceRelated == 1) //always replace
+		{
+			if ($replaceRelated_html = $this->getChildHtml('i_block_product_replace_related'))
+				echo '<div class="block-related-wrapper"><div class="product-replace-related-wrapper">' . $replaceRelated_html . '</div></div>';
+		}
+		else //replace if no related ($replaceRelated == 2)
+		{
+			if ($blockRelated_html = $this->getChildHtml('catalog.product.related')) //related exists
+				echo '<div class="block-related-wrapper">' . $blockRelated_html . '</div>';
+			else //no related
+				if ($replaceRelated_html = $this->getChildHtml('i_block_product_replace_related'))
+					echo '<div class="block-related-wrapper"><div class="product-replace-related-wrapper">' . $replaceRelated_html . '</div></div>';
+		}
+		?>
+        
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                   form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+    //]]>
+    </script>
+    <!-- here was the end: product-essential -->
+
+	<div class="product-collateral">
+    	<?php $info_tabs_html = $this->getChildHtml('info_tabs');
+			if (trim($info_tabs_html)) echo $info_tabs_html; ?>
+
+		<?php // Open the "Reviews" tab, when "X Review(s)" or "Be the first to review this product" links are clicked ?>
+		<script type="text/javascript">
+		jQuery(function() {
+			jQuery("#goto-reviews, #goto-reviews-form").click(function() {
+				jQuery("#product-tabs").data("tabs").click( jQuery("#tabreviews").index() );
+			});
+		});
+		</script>
+
+		<?php // This script creates tabs: product tabs, upsell products, related products ?>
+		<script type="text/javascript">
+        jQuery(function() {
+            jQuery(".tabs").tabs(".tabs-panes .pane", {rotate: false});
+        });
+        </script>
+
+        <?php
+		//Up-sell products (replace with static CMS block, if enabled)
+		$upsellEnabled = $themeHelper->getCfg('products/upsell_enabled');
+		$replaceUpsell = $themeHelper->getCfg('products/replace_upsell');
+        if ($upsellEnabled == 1) //upsell enabled
+		{
+			if ($replaceUpsell == 0) //never replace
+			{
+				echo $this->getChildHtml('upsell_products');
+			}
+			elseif ($replaceUpsell == 1) //always replace
+			{
+				if ($replaceUpsell_html = $this->getChildHtml('i_block_product_replace_upsell'))
+						echo '<div class="product-replace-upsell-wrapper">' . $replaceUpsell_html . '</div>';
+			}
+			else //replace if no upsell ($replaceUpsell == 2)
+			{
+				if ($blockUpsell_html = $this->getChildHtml('upsell_products'))
+					echo $blockUpsell_html;
+				else
+					if ($replaceUpsell_html = $this->getChildHtml('i_block_product_replace_upsell'))
+						echo '<div class="product-replace-upsell-wrapper">' . $replaceUpsell_html . '</div>';
+			}
+		}
+		else //upsell disabled
+		{
+			if ($replaceUpsell == 1 || $replaceUpsell == 2)
+				if ($replaceUpsell_html = $this->getChildHtml('i_block_product_replace_upsell'))
+					echo '<div class="product-replace-upsell-wrapper">' . $replaceUpsell_html . '</div>';
+		}
+		?>
+        
+        <?php echo $this->getChildHtml('product_additional_data') ?>
+	</div> 
+</div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=260001330735717";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>

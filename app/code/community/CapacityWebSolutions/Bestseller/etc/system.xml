@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright  Copyright (c) 2011 Capacity Web Solutions Pvt. Ltd  (http://www.capacitywebsolutions.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+
+  <tabs>
+        <bestseller>
+            <label>Capacity Web Solutions</label>
+            <sort_order>100</sort_order>
+        </bestseller>
+    </tabs>
+    <sections>
+        <bestseller translate="label">
+            <class>separator-top</class>
+            <label>Best Seller Products</label>
+            <tab>bestseller</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>40</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						 <heading translate="label">
+                            <label>Heading</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </heading>
+						
+                        <number_of_items translate="label comment">
+                            <label>Number Of Items in Main Block</label>
+                            <comment>How many best seller products will be showed in main block?</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </number_of_items>
+                        
+                        <number_of_items_per_row translate="label comment">
+                            <label>Number Of Items per row in Main Block</label>
+                            <comment>How many best seller products will be showed per row?</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </number_of_items_per_row>   
+						
+						<thumbnail_height translate="label">
+							<label>Thumbnail Height</label>	
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</thumbnail_height> 
+						
+						<thumbnail_width translate="label">
+							<label>Thumbnail Width</label>	
+							<frontend_type>text</frontend_type>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</thumbnail_width>
+						
+						<time_period translate="label">
+							<label>Time Period</label>	
+							<comment>Days bestselling product. Default 60 days.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</time_period>                    
+						<time_period translate="label">
+							<label>Time Period</label>	
+							<comment>Days bestselling product. Default 60 days.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</time_period>                    
+					
+					
+						<add_to_cart translate="label">
+							<label>Add to Cart</label>	
+							<comment>Select Yes for display the Add to cart button on frontend.</comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>6</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</add_to_cart> 
+
+						 <active translate="label">
+							<label>Add to Wishlist</label>	
+							<comment>Select Yes for display the Add to Wishlist Link on frontend.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+
+						<add_to_compare translate="label">
+							<label>Add to Compare</label>	
+							<comment>Select Yes for display the Add to Compare Link on frontend.</comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>8</sort_order>
+							<show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</add_to_compare> 
+						                   
+                    </fields>
+                </general>
+            </groups>
+        </bestseller>
+    </sections>
+</config>

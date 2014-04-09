@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category	Infortis
+ * @package		Infortis_ThemeAdmin
+ * @author		Infortis
+ * @copyright	Copyright 2012 Infortis
+ * @version:    1.3.1
+ */
+-->
+<config>
+    <modules>
+        <Infortis_ThemeAdmin>
+            <version>1.3.1</version>
+        </Infortis_ThemeAdmin>
+    </modules>
+    <!--<frontend>
+        <layout>
+            <updates>
+                <themeadmin>
+                    <file>themeadmin.xml</file>
+                </themeadmin>
+            </updates>
+        </layout>
+    </frontend>-->
+    <global>
+        <models>
+            <themeadmin>
+                <class>Infortis_ThemeAdmin_Model</class>
+            </themeadmin>
+        </models>
+        <blocks>
+            <themeadmin>
+                <class>Infortis_ThemeAdmin_Block</class>
+            </themeadmin>
+        </blocks>
+        <helpers>
+            <themeadmin>
+                <class>Infortis_ThemeAdmin_Helper</class>
+            </themeadmin>
+        </helpers>
+    </global>
+	<default>
+		<themeadmin>
+			<header>
+				<links_home_enabled>1</links_home_enabled>
+				<links_home_img>1</links_home_img>
+				<links_signup_enabled>1</links_signup_enabled>
+				<links_custom_link_enabled>0</links_custom_link_enabled>
+			</header>
+			<mainmenu>
+				<standard_menu_enabled>0</standard_menu_enabled>
+				<wide_menu_enabled>1</wide_menu_enabled>
+				<level2_column_count>6</level2_column_count>
+				<level2_column_auto_height>1</level2_column_auto_height>
+				<level2_link_min_height></level2_link_min_height>
+			</mainmenu>
+			<category>
+				<aspect_ratio>0</aspect_ratio>
+			</category>
+			<category_grid>
+				<column_count>3</column_count>
+				<grid_item_min_height></grid_item_min_height>
+			</category_grid>
+			<products>
+				<label_new_enabled>1</label_new_enabled>
+				<label_sale_enabled>1</label_sale_enabled>
+				<product_right_box_enabled>1</product_right_box_enabled>
+				<replace_related>0</replace_related>
+				<upsell_enabled>1</upsell_enabled>
+				<replace_upsell>0</replace_upsell>
+			</products>
+			<images>
+				<product_main_width>265</product_main_width>
+				<product_main_height>265</product_main_height>
+				<product_thumbnail_width>56</product_thumbnail_width>
+				<product_thumbnail_height>56</product_thumbnail_height>
+			</images>
+			<footer>
+				<links_column_auto_width>1</links_column_auto_width>
+			</footer>
+			<product_slider>
+				<timeout></timeout>
+				<speed>1600</speed>
+			</product_slider>
+		</themeadmin>
+		<themedesign>
+			<header>
+				<bg>gray-d</bg>
+				<skin>default</skin>
+				<top_links_skin>default</top_links_skin>
+			</header>
+			<nav>
+				<bg>red</bg>
+				<level1_link_color>white</level1_link_color>
+				<level1_link_shadow>1</level1_link_shadow>
+				<level2_link>lgray-red</level2_link>
+			</nav>
+			<footer>
+				<bg>gray</bg>
+				<skin>0</skin>
+				<links_column_wrapper_height>120</links_column_wrapper_height>
+			</footer>
+			<product_slider>
+				<timeout>0</timeout>
+				<speed>1600</speed>
+			</product_slider>
+		</themedesign>
+	</default>
+</config>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <wallet_adminhtml_walletbackend_index>
+	<reference name="content">
+	  <block type="wallet/adminhtml_walletbackend" name="walletbackend" template="wallet/walletbackend.phtml"/>
+	</reference>
+  </wallet_adminhtml_walletbackend_index>
+</layout>

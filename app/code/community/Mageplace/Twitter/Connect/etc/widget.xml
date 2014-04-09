@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplace Twitter Connector
+ *
+ * @category	Mageplace_Twitter
+ * @package		Mageplace_Twitter_Connect
+ * @copyright	Copyright (c) 2011 Mageplace. (http://www.mageplace.com)
+ * @license		http://www.mageplace.com/disclaimer.html
+ */
+-->
+<widgets>
+	<twitterconnect_button type="twitterconnect/widget_connectbutton" translate="name" module="twitterconnect">
+		<name>Twitter Connect Button</name>
+		<parameters>
+			<title translate="label value">
+				<label>Title</label>
+				<visible>1</visible>
+				<required>0</required>
+				<type>text</type>
+				<value>Sign in with Twitter</value> 
+			</title>
+			<template translate="label">
+				<label>Frontend Template</label>
+				<visible>1</visible>
+				<required>1</required>
+				<type>text</type>
+				<value>twitter/connect/widget/connectbutton.phtml</value> 
+			</template>
+		</parameters>
+	</twitterconnect_button>
+</widgets>

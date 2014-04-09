@@ -1,0 +1,92 @@
+<?php
+/**
+ * @copyright  Copyright (c) 2011 Capacity Web Solutions Pvt. Ltd  (http://www.capacitywebsolutions.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<style>
+.productList { float:left; width:720px; }
+.productList .product { background:#fff; border:1px solid #ccc; padding:5px; width:150px; float:left; margin:10px 8px 10px 0; text-align:center; }
+.productList .product .cl { padding:0 0 0 30px; }
+.productList .product .addCompare { float:left; clear:both; }
+.productList .product .addWishlist { float:left; clear:both; }
+
+</style>
+<?php
+
+
+$result = $this->getBestsellerProduct(); 
+$itemPerRow = ($this->getItemsPerRow()) ? $this->getItemsPerRow() : 2 ;
+ //getting product model
+
+$model = Mage::getModel('catalog/product');
+?>
+
+<div class="sectionHead"><h2><?php echo $this->getHeader(); ?></h2></div>
+<table border="0" cellpadding="0" cellspacing="0" class="productList">
+	<tr>
+<?php  $i=0;
+for($cnt = 0; $cnt<count($result); $cnt++){
+	
+	$_product = $model->load($result[$cnt]); //getting product object for particular product id
+	if($i>($itemPerRow-1))
+			echo '<tr valign="top">';
+	?>
+   
+
+    <td width="50%" class="product">
+    
+    	<div class="prodimage">
+				<a href="<?php echo $this->getBaseUrl().$_product['url_path']; ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>">
+					<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(($this->getImageHeight()) ? $this->getImageHeight() : 65,($this->getImageWidth()) ? $this->getImageWidth() : 65); ?>" alt="<?php echo $this->htmlEscape($_product['name']) ?>"/>
+				</a>
+			</div>
+            <div class="prodDetails">
+				<a href="<?php echo $this->getBaseUrl().$_product['url_path'] ?>" title="<?php echo $this->htmlEscape($_product['name']) ?>"><?php echo $this->htmlEscape($_product['name']) ?></a>
+				<div class="prodprice paddtl">
+					
+                    <span class="price-box"><?php echo Mage::helper('core')->currency(number_format($_product->getPrice(),2)); ?></span>
+                    <?php //echo $this->getPriceHtml($_product, true) ?>
+				</div>
+				<?php $addtocartval = $this->getAddToCart();
+					if($addtocartval == 1){
+					if($_product->isSaleable()): ?>
+
+				<button class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><?php echo $this->__('Add to Cart') ?></span></button>
+				<?php else: ?>
+				<span class="out-of-stock"><?php echo $this->__('Out of stock') ?></span>
+				<?php endif; }?>
+			</div>
+			<div class="cl">
+				<?php $wishlists = $this->getActive();
+					if($wishlists == 1){
+				 if ($this->helper('wishlist')->isAllow()) : ?>
+				<a href="<?php echo $this->getAddToWishlistUrl($_product) ?>" class="addWishlist"><?php echo $this->__('Add to Wishlist') ?></a>
+				<?php endif; }?>
+				<?php $addtocompare = $this->getAddToCompare();
+					if($addtocompare==1){
+				if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
+				&nbsp;<a href="<?php echo $_compareUrl; ?>" class="addCompare"><?php echo $this->__('Add to Compare') ?></a>
+				<?php endif; }?>
+			</div>
+   	</td>
+    <?php
+			$i++;
+			
+			if($i>($itemPerRow-1))
+			{ 	$i=0;
+				echo "</tr>";
+				echo '<tr><td colspan="3" class="hline"><img src="'. $this->getSkinUrl('images/spacer.gif') .'" alt="" /></td></tr>';
+			}
+			
+			if($i==($itemPerRow))
+			{ 
+		echo '<td class="vline"><img src="'. $this->getSkinUrl('images/spacer.gif') .'" alt=""/></td>';
+		}
+
+
+}
+
+?>
+</tr>
+</table>

@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ * 
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   Codnitive
+ * @package    Codnitive_Defaultrtl
+ * @author     Hassan Barza <support@codnitive.com>
+ * @copyright  Copyright (c) 2012 CODNITIVE Co. (http://www.codnitive.com)
+ */
+-->
+<config>
+    <modules>
+        <Codnitive_Defaultrtl>
+            <version>1.7.00</version>
+            <title>RtL Default Theme</title>
+            <link><![CDATA[http://www.codnitive.com/]]></link>
+        </Codnitive_Defaultrtl>
+    </modules>
+    <global>
+        <models>
+            <defaultrtl>
+                <class>Codnitive_Defaultrtl_Model</class>
+            </defaultrtl>
+        </models>
+        <helpers>
+            <defaultrtl>
+                <class>Codnitive_Defaultrtl_Helper</class>
+            </defaultrtl>
+        </helpers>
+        <resources>
+            <defaultrtl_setup>
+                <setup>
+                    <module>Codnitive_Defaultrtl</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </defaultrtl_setup>
+            <defaultrtl_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </defaultrtl_write>
+            <defaultrtl_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </defaultrtl_read>
+        </resources>
+        <blocks>
+            <bundle>
+                <rewrite>
+                    <catalog_product_view_type_bundle_option_checkbox>Codnitive_Defaultrtl_Block_Bundle_Catalog_Product_View_Type_Bundle_Option_Checkbox</catalog_product_view_type_bundle_option_checkbox>
+                    <catalog_product_view_type_bundle_option_radio>Codnitive_Defaultrtl_Block_Bundle_Catalog_Product_View_Type_Bundle_Option_Radio</catalog_product_view_type_bundle_option_radio>
+                </rewrite>
+            </bundle>
+            <catalog>
+                <rewrite>
+                    <product_view_options_type_date>Codnitive_Defaultrtl_Block_Catalog_Product_View_Options_Type_Date</product_view_options_type_date>
+                    <product_view_options_type_select>Codnitive_Defaultrtl_Block_Catalog_Product_View_Options_Type_Select</product_view_options_type_select>
+                </rewrite>
+            </catalog>
+            <defaultrtl>
+                <class>Codnitive_Defaultrtl_Block</class>
+            </defaultrtl>
+        </blocks>
+    </global>
+
+<!--    <adminhtml>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <codnitivecatalog>
+                                            <title>CODNITIVE Catalog</title>
+                                        </codnitivecatalog>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+		
+        <translate>
+            <modules>
+                <Codnitive_Defaultrtl>
+                    <files>
+                        <default>Codnitive_Defaultrtl.csv</default>
+                    </files>
+                </Codnitive_Defaultrtl>
+            </modules>
+        </translate>
+    </adminhtml> -->
+
+    <frontend>
+<!--        <translate>
+            <modules>
+                <Codnitive_Defaultrtl>
+                    <files>
+                        <default>Codnitive_Defaultrtl.csv</default>
+                    </files>
+                </Codnitive_Defaultrtl>
+            </modules>
+        </translate> -->
+
+        <layout>
+            <updates>
+                <defaultrtl>
+                    <file>defaultrtl.xml</file>
+                </defaultrtl>
+            </updates>
+        </layout>
+    </frontend>
+
+<!--    <default>
+        <codnitivecatalog>
+            <defaultrtl>
+                <active>1</active>
+            </defaultrtl>
+        </codnitivecatalog>
+    </default>-->
+</config>

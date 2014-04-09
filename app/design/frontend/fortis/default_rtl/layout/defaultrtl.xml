@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   Codnitive
+ * @package    Codnitive_Defaultrtl
+ * @author     Hassan Barza <h.barza@gmail.com>
+ * @copyright  Copyright (c) 2012 CODNITIVE Co. (http://www.codnitive.com)
+ */
+-->
+<layout version="0.1.0">
+    
+    <!--
+    Default layout, loads most of the pages
+    -->
+    <default translate="label" module="page">
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/styles-aie.css</name><params/><if>IE</if></action>
+            <action method="addItem"><type>skin_css</type><name>css/styles-ie9.css</name><params/><if>IE 9</if></action>
+        </reference>
+    </default>
+</layout>

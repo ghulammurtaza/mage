@@ -1,0 +1,26 @@
+<?php echo Mage::getModel('onepay/onepay')->getTitle();?>
+<?php $order = $this->getOrder();
+
+	if($order->getId()):
+		$payments = $order->getPayment()->getAdditionalInformation();
+		if(count($payments)):
+?>
+			<div>
+				<table>
+					<col width="180"/>
+					<col width="1"/>
+				<?php 
+
+					foreach($payments as $key=>$payment):
+				?>
+				
+						<tr>
+							<td><?php echo $key; ?></td>
+							<td><?php echo $payment; ?></td>
+						</tr>
+				<?php endforeach; ?>				
+				</table>
+			</div>
+		<?php endif; ?>
+	<?php endif; ?>			
+		

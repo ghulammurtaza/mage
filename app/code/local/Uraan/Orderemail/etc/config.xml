@@ -1,0 +1,34 @@
+<?xml version="1.0"?>  
+<config>  
+    <modules>  
+        <Uraan_Orderemail>  
+            <version>0.1.0</version>  
+        </Uraan_Orderemail>  
+    </modules>     
+<frontend>        
+    <events>  
+        <checkout_type_onepage_save_order>  
+            <observers>  
+                <Uraan_Orderemail_Onepage>  
+                    <type>singleton</type>  
+                    <class>uraan_orderemail_model_observer</class>
+                    <method>setOrderComment</method>
+                </Uraan_Orderemail_Onepage>
+            </observers>
+        </checkout_type_onepage_save_order>
+    </events>  
+</frontend> 
+
+<global>      
+    <template>
+        <email>
+            <custom_email_template1 module="orderemail">
+                <label>couponcode custom email module</label>
+                <file>couponcode_custom_email1.html</file>
+                <type>html</type>
+            </custom_email_template1>
+        </email>
+    </template>
+</global>
+     
+</config>

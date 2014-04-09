@@ -1,0 +1,310 @@
+<?php $web_url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
+    $ip = getRealIpAddr();
+    $location = getResult($ip);
+    $selectCountry = ucfirst(strtolower($location['countryName']));
+    //echo "<pre>"; print_r($location);
+    //echo $selectCountry; exit;
+    
+    function getResult($ip){
+//        $ip = @gethostbyname($host);
+    
+        if(preg_match('/^(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)(?:[.](?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)){3}$/', $ip)){
+            $xml = @file_get_contents('http://' . 'api.ipinfodb.com' . '/' . 'v3' . '/' . 'ip-city' . '/?key=' . '9073cd4ea341a2f4f9d1102bdbd252df303d3c39da6e740b825aa3272807511b' . '&ip=' . $ip . '&format=xml');
+
+            try{
+                $response = @new SimpleXMLElement($xml);
+
+                foreach($response as $field=>$value){
+                    $result[(string)$field] = (string)$value;
+                }
+                return $result;
+            }
+            catch(Exception $e){
+                $errors[] = $e->getMessage();
+                return $errors;
+            }
+        }
+
+        $errors[] = '"' . $ip . '" is not a valid IP address or hostname.';
+        return $errors;
+    }
+    function getRealIpAddr()
+    {
+        //$reverse_proxy_header = variable_get('reverse_proxy_header', 'HTTP_X_FORWARDED_FOR');
+        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //check ip from share internet
+        {
+          //$reverse_proxy_addresses = variable_get('reverse_proxy_addresses', array());
+          $forwarded = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);  
+          $forwarded = array_map('trim', $forwarded);
+          $ip = array_pop($forwarded);
+          //$ip=$_SERVER['reverse_proxy_header'];
+        }        
+        else
+        {
+          $ip=$_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
+    }
+    
+    
+?>
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @see Mage_Checkout_Block_Cart
+ */
+/**
+ * - Removed top "checkout" button
+ * - Added table wrapper (to show background image)
+ * - Changed "continue shopping" button and "update cart" button
+ * - Added class 'last' in table header last cells
+ * - Rearranged layout of 'cart-collaterals'
+ */
+?>
+<div class="cart">
+    <div class="page-title title-buttons">
+        <h1><?php echo $this->__('Shopping Cart') ?></h1>
+        <?php /* my:del
+        <?php if(!$this->hasError()): ?>
+        <ul class="checkout-types">
+        <?php foreach ($this->getMethods('top_methods') as $method): ?>
+            <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+            <li><?php echo $methodHtml; ?></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        </ul>
+        <?php endif; ?>
+		*/ ?>
+    </div>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php echo $this->getChildHtml('form_before') ?>
+    <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
+        <fieldset>
+        	<div class="cart-table-wrapper">
+            <table id="shopping-cart-table" class="data-table cart-table">
+                <col width="1" />
+                <col />
+                <col width="1" />
+            <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+                <col width="1" />
+            <?php endif ?>
+            <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+            <?php endif; ?>
+            <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+            <?php endif; ?>
+                <col width="1" />
+            <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+            <?php endif; ?>
+            <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+            <?php endif; ?>
+                <col width="1" />
+
+            <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+                <thead>
+                    <tr>
+                        <th rowspan="<?php echo $mergedCells; ?>">&nbsp;</th>
+                        <th rowspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Product Name') ?></span></th>
+                        <th rowspan="<?php echo $mergedCells; ?>"></th>
+                        <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+                        <th rowspan="<?php echo $mergedCells; ?>" class="a-center"><span class="nobr"><?php echo $this->__('Move to Wishlist') ?></span></th>
+                        <?php endif ?>
+                        <th class="a-center" colspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Unit Price') ?></span></th>
+                        <th rowspan="<?php echo $mergedCells; ?>" class="a-center"><?php echo $this->__('Qty') ?></th>
+                        <th class="a-center" colspan="<?php echo $mergedCells; ?>"><?php echo $this->__('Subtotal') ?></th>
+                        <th rowspan="<?php echo $mergedCells; ?>" class="a-center last">&nbsp;</th>
+                    </tr>
+                    <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+                    <tr>
+                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                        <th class="last"><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                    </tr>
+                    <?php endif; ?>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="50" class="a-right">
+                            <?php if($this->getContinueShoppingUrl()): ?>
+                            	<a class="btn-continue" href="<?php echo $this->getContinueShoppingUrl() ?>" title="<?php echo $this->__('Continue Shopping') ?>"><?php echo $this->__('Continue Shopping') ?></a>
+                            <?php endif; ?>
+                            <button type="submit" title="<?php echo $this->__('Update Shopping Cart') ?>" class="btn-update"><a class="btn-update"><?php echo $this->__('Update Shopping Cart') ?></a></button>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                <?php foreach($this->getItems() as $_item): ?>
+                    <?php echo $this->getItemHtml($_item) ?>
+                <?php endforeach ?>
+                </tbody>
+            </table>
+            </div>
+            <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+        </fieldset>
+    </form>
+    <div class="cart-collaterals">
+    	<div class="cart-left-column">
+        	<div class="cart-top-box cart-wide-box">
+            
+            		<?php if ($tmp_html = $this->getChildHtml('i_block_cart_below_table')): ?> <?php //Predefined CMS block ?>
+                        <div class="cart-below-table-wrapper"><?php echo $tmp_html; ?></div>
+                    <?php endif; ?>
+
+					<div class="col2-set">
+                        <div class="col-1">
+                        	<?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
+                        </div>
+                        <div class="col-2">
+                        	<?php echo $this->getChildHtml('coupon') ?>
+                        </div>
+					</div>
+            
+            </div>
+            <?php /*?><div class="col2-set">
+                <div class="col-1">
+                </div>
+                <div class="col-2">
+                </div>
+            </div><?php */?>
+            <div class="cart-bottom-box cart-wide-box">
+            
+            		<?php if ($tmp_html = $this->getChildHtml('i_block_cart_above_crosssell')): ?> <?php //Predefined CMS block ?>
+                        <div class="cart-above-crosssell-wrapper"><?php echo $tmp_html; ?></div>
+                    <?php endif; ?>
+    
+                    <?php if ($this->getChildHtml('crosssell')): ?>
+                        <?php echo $this->getChildHtml('crosssell') ?>
+                    <?php else: ?>
+                        <?php if ($tmp_html = $this->getChildHtml('i_block_cart_replace_crosssell')): ?> <?php //Predefined CMS block ?>
+                            <div class="cart-replace-crosssell-wrapper"><?php echo $tmp_html; ?></div>
+                        <?php endif; ?>
+                    <?php endif; ?>
+            
+            </div>
+        </div> <!-- end: left-column -->
+        <div class="cart-right-column">
+            <div class="totals">
+				<?php echo $this->getChildHtml('totals'); ?>
+                <?php if(!$this->hasError()): ?>
+                <ul class="checkout-types">
+                <?php foreach ($this->getMethods('methods') as $method): ?>
+                    <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+                    <li><?php echo $methodHtml; ?></li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+            </div>
+            
+            <?php if ($tmp_html = $this->getChildHtml('i_block_cart_below_totals')): ?> <?php //Predefined CMS block ?>
+            <div class="cart-below-totals-wrapper"><?php echo $tmp_html; ?></div>
+            <?php endif; ?>
+
+            <?php $free_shipping_subtotal =  Mage::getStoreConfig('carriers/freeshipping/free_shipping_subtotal'); ?>
+            <?php 
+                $free_delivery=$free_shipping_subtotal-$this->getQuote()->getSubtotal();
+                if($selectCountry == 'Egypt')
+                {
+            ?>
+            <div class="free-shipp">
+             <div class="shipping-bg-top"></div>
+              <div class="shipping-bg-midd">
+              <?php if ($free_delivery<0){ ?>
+                <div class="free-ship-tick"></div>
+                <div style="clear: both;"></div>
+                <div class="ship-bar">
+                    <div class="ship-bar-percent" style="width: 100%;">&nbsp;</div>
+                </div>
+                <h2>Free Shipping Available (within Egypt)</h2>
+              <?php } ?>
+                <?php 
+                    if ($free_delivery > 0){ 
+                    $width = (100/$free_shipping_subtotal)*100;
+                ?>
+                <div class="ship-bar">
+                    <div class="ship-bar-percent" style="width: <?php echo $width ?>%;">&nbsp;</div>
+                </div>
+                 <div class="shipp-num">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                     <tbody><tr>
+                       <td class="num-value"><?php echo  Mage::helper('checkout')->formatPrice($free_delivery);?></td>
+                       <td class="num-text">You need <?php echo  Mage::helper('checkout')->formatPrice($free_delivery);?> more on this order to receive free shipping (within Egypt).</td>
+               </tr>
+              </tbody></table>
+              </div>   
+                    <?php }?>
+              </div>
+              <div class="shipping-bg-btm"></div>
+            </div>
+            <?php } ?>
+		</div>
+            
+    </div>
+</div>
+
+
+
+<style>
+.free-shipp {
+    padding-bottom: 15px;
+ width:300px;
+}
+.shipping-bg-midd {
+    border-left: 1px solid #ED94AB;
+    border-right: 1px solid #ED94AB;
+    padding: 0 15px;
+    width: 281px;}
+ 
+ h2 {
+    color: #269D87;
+    font: 14px "Lucida Sans Unicode","Lucida Grande",sans-serif;
+    margin-bottom: 0;
+    padding-bottom: 4px;}
+ 
+ .shipp-num {
+    padding-bottom: 8px;
+    width: 283px;
+}
+.num-value {
+    color: #575757;
+    font: 38px "Lucida Sans Unicode","Lucida Grande",sans-serif;
+    letter-spacing: -5px;
+    padding-right: 15px;
+}
+.num-text {
+    color: #575757;
+    font: 12px/14px "Lucida Sans Unicode","Lucida Grande",sans-serif;
+    padding-top: 12px;
+}
+</style>

@@ -1,0 +1,70 @@
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_defaultrtl
+ * @author      Hassan Barza <support@codnitive.com>
+ * @copyright   Copyright (c) 2012 CODNITIVE Co. (http://www.codnitive.com)
+ */
+
+/* All IEs =============================================================================== */
+input.input-text { height:15px; }
+.quick-access .links { display:block; float:left; direction:ltr; }
+
+button.button,
+.nav-container,
+.top-bar,
+.main,
+.sidebar .block,
+.product-image,
+.opc #checkout-step-review,
+ul.messages > li { direction:ltr; }
+
+.breadcrumbs,
+.form-search,
+.col-main,
+.sidebar,
+.sidebar .block .block-title,
+.sidebar .block .block-content,
+.opc .order-review,
+.quick-access .links li,
+ul.messages > li > ul { direction:rtl; }
+
+.form-search { width:320px; }
+.opc .allow .step-title { width:667px; /*margin-right:1px;*/ }
+.opc #checkout-step-review { width:685px; /*margin-right:1px;*/ }
+/*.form-list li.wide textarea { width:608px !important; }*/
+.gift-message-link { float:right; }
+
+.sidebar .widget-product-link,
+.sidebar .widget-category-link,
+.sidebar .widget-cms-link { margin:0 10px 15px !important; padding:0 !important; }
+
+.product-essential .add-to-box input.qty { margin-left:0; }
+.block-layered-nav .block-content { margin-left:1px; width:193px; }
+.block-layered-nav .block-subtitle,
+.block-layered-nav .currently ol,
+.block-layered-nav .currently .actions { margin-right:1px; /*width:173px;*/ }
+.footer ul { display:inline-block; }
+.product-essential,
+.product-collateral { margin-right:1px; }
+table { padding-right:1px; }
+.product-essential .add-to-box button.button { margin-right:5px; }
+.product-essential .add-to-box button.grouped-btn-cart { margin-right:1px; }
+.gift-messages-form .item .details .form-list li.wide textarea { width:489px; }
+.opc .gift-messages-form { margin-right:-29px; }
+.multiple-checkout .col2-set h2.legend { margin-right:-19px; }
+.window-overlay { background-color:#000000; filter:alpha(opacity=35); }
+.order-details { width:686px; }
+.order-details .data-table { width:0; min-width:685px; /*margin-right:-1px;*//* border-left-width:2px;*/ }
+/*.block-layered-nav .currently .label { display:inline-block; *//*float:right; margin-left:3px;*//* }*/
+/* ======================================================================================= */
