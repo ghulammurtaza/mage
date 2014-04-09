@@ -1,7 +1,7 @@
 mage
 ====
 
-1) A Multilingual (Arabic,English) E-Book Magento shop. 
+1) A Multilingual (Arabic,English) E-Book Magento (1.7.0.2) shop. 
 
 2) Have two different domains for local and foreign users, with different prices for each.
 
